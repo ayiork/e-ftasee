@@ -1,3 +1,14 @@
 <resources>
-    <string name="app_name">e-ftasee</string>
+    <string name="app_name">eftasee</string>
+    <string name="fast">Fast</string>
+    <string name="order">Order</string>
+    <string name="from">from your</string>
+    <string name="phone">Phone</string>
+    <string name="submit">Submit</string>
+    <string name="call_waiter">Call a waiter</string>
+    <string name="request_bill">Request the bill</string>
+    <string name="Order">Order from menu</string>
+    <string name="my_order">My Order</string>
+    <string name="feedback">Give Feedback</string>
+    <string name="welcome_restaurant">Welcome to Andreas\' Restaurant</string>
 </resources>
