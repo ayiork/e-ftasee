@@ -10,7 +10,6 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 class FoodViewModel: ViewModel() {
-    // if its val it cannot be reassigned, if we want food could be val and be assigned here
 
     private lateinit var foodList: ArrayList<Food>
     private lateinit var foodNames: Array<String?>

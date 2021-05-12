@@ -75,26 +75,3 @@ class MenuFragment: ListFragment() {
         Log.i("ondestroy", "destroyy");
     }
 }
-//
-//class MenuFragment:Fragment() {
-//
-//    private val foodViewModel: FoodViewModel by activityViewModels()
-//    private var mCurrentPosition = -1
-//    private lateinit var food: TextView
-//
-//    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-//                              savedInstanceState: Bundle?): View {
-//
-//        // Inflate the layout for this fragment
-//        food = inflater.inflate(R.layout.food_textview, container, false) as TextView
-//        return food
-//    }
-//
-//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        super.onViewCreated(view, savedInstanceState)
-//        foodViewModel.getSelectedFood().observe(viewLifecycleOwner, {
-//            food.text = it.second.details
-//            mCurrentPosition = it.first
-//        })
-//    }
-//}

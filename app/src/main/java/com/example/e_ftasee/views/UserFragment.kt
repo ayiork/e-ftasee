@@ -15,7 +15,6 @@ import com.example.e_ftasee.R
 
 class UserFragment: Fragment() {
 
-    private lateinit var user_fragment: ConstraintLayout
     private lateinit var communicator: ConnectorFragment
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,

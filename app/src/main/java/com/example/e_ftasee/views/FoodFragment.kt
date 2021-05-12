@@ -31,9 +31,6 @@ class FoodFragment: Fragment(),View.OnClickListener {
 
         // Inflate the layout for this fragment
         Log.i("FoodFragmentStart", "onCreateview");
-//        val food_frag = inflater.inflate(R.layout.food_fragment, container, false)
-//        food = food_frag.findViewById(R.id.foodtext) as TextView
-       // food = inflater.inflate(R.layout.food_textview, container, false) as TextView
 
         vieww = inflater.inflate(R.layout.food_layout, container, false) as View
         food = vieww.findViewById(R.id.foodtext) as TextView
@@ -60,39 +57,3 @@ class FoodFragment: Fragment(),View.OnClickListener {
 
 }
 
-
-
-// recycler view will be added here
-//class FoodFragment: ListFragment() {
-//
-//    private val foodViewModel: FoodViewModel by activityViewModels()
-//
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//
-//        // We need to use a different list item layout for devices older than Honeycomb
-//        val layout = android.R.layout.simple_list_item_activated_1
-//
-//        // Create an array adapter for the list view, using the Ipsum headlines array
-//        listAdapter = ArrayAdapter(requireContext(), layout, foodViewModel.getFoodNames())
-//    }
-//
-//    override fun onStart() {
-//        super.onStart()
-//
-//        // When in two-pane layout, set the listview to highlight the selected list item
-//        // (We do this during onStart because at the point the listview is available.)
-//        if (parentFragmentManager.findFragmentById(R.id.food_details_fragment) != null) {
-//            listView.choiceMode = ListView.CHOICE_MODE_SINGLE
-//        }
-//    }
-//    override fun onListItemClick(l: ListView, v: View, position: Int, id: Long) {
-//        // Notify the parent activity of selected item
-//        //mCallback?.onArticleSelected(position)
-//
-//        // Set the item as checked to be highlighted when in two-pane layout
-//        foodViewModel.selectFoodAt(position)
-//        listView.setItemChecked(position, true)
-//        //listView.setItemChecked(position, true)
-//    }
-//}
