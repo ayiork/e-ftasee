@@ -14,7 +14,7 @@ class FoodManager {
         food = ArrayList()
 
         food.add(
-                Food("Mix", "Cyprus pitta with 2 skewers pork and 1 skewer sheftalia")
+                Food("Mix", "Cyprus pitta with 2 skewers pork and 1 skewer sheftalia\nPrice: €5.00")
         )
 
         food.add(

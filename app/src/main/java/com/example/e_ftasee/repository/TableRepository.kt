@@ -1,5 +1,4 @@
 package com.example.e_ftasee.repository
-
 import com.example.e_ftasee.models.Table
 
 class TableRepository {

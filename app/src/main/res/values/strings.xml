@@ -1,9 +1,8 @@
 <resources>
     <string name="app_name">eftasee</string>
-    <string name="fast">Fast</string>
-    <string name="order">Order</string>
-    <string name="from">from your</string>
-    <string name="phone">Phone</string>
+    <string name="fast">QUICK-EASY-SIMPLE ORDER</string>
+    <string name="logo">eftasee logo</string>
+    <string name="hint_table_code">Write your table code here</string>
     <string name="submit">Submit</string>
     <string name="call_waiter">Call a waiter</string>
     <string name="request_bill">Request the bill</string>
