@@ -5,8 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.e_ftasee.models.Food
-import com.example.e_ftasee.models.FoodManager
-import java.util.*
+import com.example.e_ftasee.repository.FoodManager
 import kotlin.collections.ArrayList
 
 class FoodViewModel: ViewModel() {

@@ -10,4 +10,8 @@
     <string name="my_order">My Order</string>
     <string name="feedback">Give Feedback</string>
     <string name="welcome_restaurant">Welcome to Andreas\' Restaurant</string>
+    <string name="owner">Owner</string>
+    <string name="login">Log in</string>
+    <string name="username">username</string>
+    <string name="password">password</string>
 </resources>

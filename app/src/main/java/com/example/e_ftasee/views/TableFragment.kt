@@ -23,6 +23,7 @@ class TableFragment : Fragment(){
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val  tableLayout: View = inflater!!.inflate(R.layout.table_layout, container, false)
         communicator = activity as ConnectorFragment
+
         val button =  tableLayout?.findViewById<View>(R.id.button) as Button
         button.setOnClickListener{
             val codeText = tableLayout?.findViewById<View>(R.id.editTextNumberDecimal) as EditText
@@ -31,6 +32,12 @@ class TableFragment : Fragment(){
                 communicator.passCode(code)
             }
         }
+
+        val button_login =  tableLayout?.findViewById<View>(R.id.button3) as Button
+        button_login.setOnClickListener{
+            communicator.loginPage()
+        }
+
         return tableLayout
     }
 

@@ -12,6 +12,8 @@ import android.widget.TextView
 import androidx.fragment.app.*
 import androidx.lifecycle.Lifecycle
 import com.example.e_ftasee.R
+import com.google.android.material.snackbar.Snackbar
+
 class MenuFragment: ListFragment() {
 
     private val foodViewModel: FoodViewModel by activityViewModels()
@@ -21,10 +23,9 @@ class MenuFragment: ListFragment() {
 
         // We need to use a different list item layout for devices older than Honeycomb
         val layout = android.R.layout.simple_list_item_activated_1
-
         // Create an array adapter for the list view, using the Ipsum headlines array
         listAdapter = ArrayAdapter(requireActivity(), layout, foodViewModel.getFoodNames())
-        Log.i("MenuFragmentCreate", foodViewModel.getFoodNames().toString())
+        //Log.i("MenuFragmentCreate", foodViewModel.getFoodNames().toString())
     }
     @Override
     override fun onStart() {
@@ -46,7 +47,7 @@ class MenuFragment: ListFragment() {
         // Set the item as checked to be highlighted when in two-pane layout
         foodViewModel.selectFoodAt(position)
         listView.setItemChecked(position, true)
-        Log.i("onListItemClick", "cliked");
+        //Log.i("onListItemClick", "cliked");
         val userFrag = parentFragmentManager.findFragmentById(R.id.food_details_fragment) as FoodFragment?
                 if (userFrag == null) {
                     val transaction = parentFragmentManager.beginTransaction()
@@ -60,7 +61,6 @@ class MenuFragment: ListFragment() {
     @Override
     override fun onStop() {
         super.onStop()
-        Log.i("onstop", "stooop");
         listView.setItemChecked(0, false)
     }
 
@@ -71,7 +71,5 @@ class MenuFragment: ListFragment() {
     @Override
     override fun onDestroy() {
         super.onDestroy()
-
-        Log.i("ondestroy", "destroyy");
     }
 }

@@ -1,6 +1,7 @@
-package com.example.e_ftasee.models
+package com.example.e_ftasee.repository
 
 import android.util.Log
+import com.example.e_ftasee.models.Food
 
 class FoodManager {
     lateinit var food: ArrayList<Food>
@@ -97,7 +98,7 @@ class FoodManager {
         food.add(
                 Food("Sausages","Cyprus pitta with 3 sausages")
         )
-        Log.i("FoodManager", "food added")
+        //Log.i("FoodManager", "food added")
     }
 
     fun getFoodNames(): Array<String?> {

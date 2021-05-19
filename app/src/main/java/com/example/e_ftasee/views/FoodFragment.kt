@@ -30,12 +30,13 @@ class FoodFragment: Fragment(),View.OnClickListener {
                               savedInstanceState: Bundle?): View {
 
         // Inflate the layout for this fragment
-        Log.i("FoodFragmentStart", "onCreateview");
+       // Log.i("FoodFragmentStart", "onCreateview");
 
         vieww = inflater.inflate(R.layout.food_layout, container, false) as View
         food = vieww.findViewById(R.id.foodtext) as TextView
         val addToOrderBut: Button = vieww!!.findViewById(R.id.add_button) as Button
         addToOrderBut.setOnClickListener(this)
+
         return vieww
     }
 
