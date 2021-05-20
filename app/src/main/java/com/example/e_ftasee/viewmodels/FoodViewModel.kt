@@ -34,6 +34,13 @@ class FoodViewModel: ViewModel() {
         return foodNames
     }
 
+    fun getFoodById(id: Long):Food?{
+        for (food in foodList)
+            if (food.foodId== id)
+                return food
+        return null
+    }
+
     private fun loadFoodNames(){
         foodNames = foodManager.getFoodNames()
     }
