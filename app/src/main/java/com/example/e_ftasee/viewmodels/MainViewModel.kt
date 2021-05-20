@@ -1,7 +1,10 @@
 package com.example.e_ftasee.viewmodels
 
+import android.content.Intent
+import android.os.Build
 import android.text.Editable
 import android.util.Log
+import androidx.core.content.ContextCompat.startForegroundService
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -65,5 +68,6 @@ class MainViewModel : ViewModel(){
     fun sendMessage(msg : String) {
         client.sendMsg(msg)
     }
+
 
 }

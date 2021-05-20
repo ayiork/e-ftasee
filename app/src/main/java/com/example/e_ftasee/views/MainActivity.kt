@@ -13,7 +13,6 @@ import androidx.lifecycle.ViewModel
 import com.example.e_ftasee.viewmodels.MainViewModel
 import com.example.e_ftasee.R
 import com.example.e_ftasee.viewmodels.FoodViewModel
-import com.example.e_ftasee.viewmodels.TcpClientService
 import com.example.e_ftasee.viewmodels.TcpServerService
 
 class MainActivity : AppCompatActivity(), ConnectorFragment{
@@ -24,11 +23,6 @@ class MainActivity : AppCompatActivity(), ConnectorFragment{
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            startForegroundService(Intent(applicationContext, TcpServerService::class.java))
-        } else {
-            startService(Intent(applicationContext, TcpServerService::class.java))
-        }
         /*
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             startForegroundService(Intent(applicationContext, TcpClientService::class.java))
@@ -43,6 +37,14 @@ class MainActivity : AppCompatActivity(), ConnectorFragment{
             //firstFragment.arguments = intent.extras
             supportFragmentManager.beginTransaction()
                 .add(R.id.fragment_container, firstFragment).commit()
+        }
+    }
+
+    fun startServerService() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            startForegroundService(Intent(applicationContext, TcpServerService::class.java))
+        } else {
+            startService(Intent(applicationContext, TcpServerService::class.java))
         }
     }
 
@@ -79,8 +81,9 @@ class MainActivity : AppCompatActivity(), ConnectorFragment{
 
     override fun login(user: String, pass: String) {
         if (mainViewModel.auth(user,pass)){
+            startServerService()
             val transaction = supportFragmentManager.beginTransaction()
-            val newFragment = MenuFragment()
+            val newFragment = OrdersFragment()
             transaction.replace(R.id.fragment_container, newFragment).addToBackStack(null)
             transaction.commit()
         }

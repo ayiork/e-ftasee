@@ -5,12 +5,13 @@ import java.io.DataInputStream
 import java.io.DataOutputStream
 import java.io.IOException
 
-class TcpServerHandler(private val dataInputStream: DataInputStream, private val dataOutputStream: DataOutputStream) : Thread() {
+class TcpClientHandler(private val dataInputStream: DataInputStream, private val dataOutputStream: DataOutputStream) : Thread() {
     override fun run() {
         while (true) {
             try {
                 if(dataInputStream.available() > 0){
                     Log.i(TAG, "Received: " + dataInputStream.readUTF())
+
                     dataOutputStream.writeUTF("Hello Client")
                     sleep(2000L)
                 }
@@ -35,7 +36,7 @@ class TcpServerHandler(private val dataInputStream: DataInputStream, private val
     }
 
     companion object {
-        private val TAG = TcpServerHandler::class.java.simpleName
+        private val TAG = TcpClientHandler::class.java.simpleName
     }
 
 }
