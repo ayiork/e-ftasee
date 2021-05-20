@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity(), ConnectorFragment{
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        startServerService()
         /*
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             startForegroundService(Intent(applicationContext, TcpClientService::class.java))
@@ -60,10 +60,12 @@ class MainActivity : AppCompatActivity(), ConnectorFragment{
     }
 
     override fun tableChoice(choice: Int) {
-        if (choice==1)
-            mainViewModel.sendMessage("Waiter/waitress for table: "+mainViewModel.givenID().value)
+        if (choice==1) {
+            mainViewModel.sendMessage("Table " + mainViewModel.givenID().value + ", Client want a waiter/waitress")
+
+        }
         if (choice==2)
-            mainViewModel.sendMessage("Bill for table: "+mainViewModel.givenID().value)
+            mainViewModel.sendMessage("Table "+mainViewModel.givenID().value+"Client want the bill.")
         if(choice==3){
             val transaction = supportFragmentManager.beginTransaction()
             val newFragment = MenuFragment()
@@ -81,7 +83,7 @@ class MainActivity : AppCompatActivity(), ConnectorFragment{
 
     override fun login(user: String, pass: String) {
         if (mainViewModel.auth(user,pass)){
-            startServerService()
+            //startServerService()
             val transaction = supportFragmentManager.beginTransaction()
             val newFragment = OrdersFragment()
             transaction.replace(R.id.fragment_container, newFragment).addToBackStack(null)
