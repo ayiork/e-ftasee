@@ -15,89 +15,48 @@ class FoodManager {
         food = ArrayList()
 
         food.add(
-                Food("Mix", "Cyprus pitta with 2 skewers pork and 1 skewer sheftalia\nPrice: €5.00")
+                Food(name="Mix", details = "Cyprus pitta with 2 skewers pork and 1 skewer sheftalia\nPrice: €5.00")
         )
 
         food.add(
-                Food("Souvlakia","Cyprus pitta with 3 skewers pork ")
+                Food(name="Souvlakia", details = "Cyprus pitta with 3 skewers pork ")
         )
         food.add(
-                Food("Halloumi", "Cyprus pitta with halloumi")
+                Food(name= "Halloumi", details="Cyprus pitta with halloumi")
         )
 
         food.add(
-                Food("Chicken Souvlaki","Cyprus pitta with 3 skewers chicken")
+                Food(name="Chicken Souvlaki",details="Cyprus pitta with 3 skewers chicken")
         )
         food.add(
-                Food("Desert-rizogalo", "Rizogalo with cinnamon")
+                Food(name="Desert-rizogalo", details="Rizogalo with cinnamon")
         )
 
         food.add(
-                Food("Sausages","Cyprus pitta with 3 sausages")
+                Food(name="Sausages",details = "Cyprus pitta with 3 sausages")
         )
         food.add(
-                Food("Mix", "Cyprus pitta with 2 skewers pork and 1 skewer sheftalia")
+            Food(name="Mix", details = "Cyprus pitta with 2 skewers pork and 1 skewer sheftalia\nPrice: €5.00")
         )
 
         food.add(
-                Food("Souvlakia","Cyprus pitta with 3 skewers pork ")
+            Food(name="Souvlakia", details = "Cyprus pitta with 3 skewers pork ")
         )
         food.add(
-                Food("Halloumi", "Cyprus pitta with halloumi")
+            Food(name= "Halloumi", details="Cyprus pitta with halloumi")
         )
 
         food.add(
-                Food("Chicken Souvlaki","Cyprus pitta with 3 skewers chicken")
+            Food(name="Chicken Souvlaki",details="Cyprus pitta with 3 skewers chicken")
         )
         food.add(
-                Food("Desert-rizogalo", "Rizogalo with cinnamon")
+            Food(name="Desert-rizogalo", details="Rizogalo with cinnamon")
         )
 
         food.add(
-                Food("Sausages","Cyprus pitta with 3 sausages")
-        )
-        food.add(
-                Food("Mix", "Cyprus pitta with 2 skewers pork and 1 skewer sheftalia")
+            Food(name="Sausages",details = "Cyprus pitta with 3 sausages")
         )
 
-        food.add(
-                Food("Souvlakia","Cyprus pitta with 3 skewers pork ")
-        )
-        food.add(
-                Food("Halloumi", "Cyprus pitta with halloumi")
-        )
-
-        food.add(
-                Food("Chicken Souvlaki","Cyprus pitta with 3 skewers chicken")
-        )
-        food.add(
-                Food("Desert-rizogalo", "Rizogalo with cinnamon")
-        )
-
-        food.add(
-                Food("Sausages","Cyprus pitta with 3 sausages")
-        )
-        food.add(
-                Food("Mix", "Cyprus pitta with 2 skewers pork and 1 skewer sheftalia")
-        )
-
-        food.add(
-                Food("Souvlakia","Cyprus pitta with 3 skewers pork ")
-        )
-        food.add(
-                Food("Halloumi", "Cyprus pitta with halloumi")
-        )
-
-        food.add(
-                Food("Chicken Souvlaki","Cyprus pitta with 3 skewers chicken")
-        )
-        food.add(
-                Food("Desert-rizogalo", "Rizogalo with cinnamon")
-        )
-
-        food.add(
-                Food("Sausages","Cyprus pitta with 3 sausages")
-        )
         //Log.i("FoodManager", "food added")
     }
 
