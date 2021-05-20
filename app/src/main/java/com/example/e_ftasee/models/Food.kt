@@ -12,6 +12,8 @@ data class Food(
     @ColumnInfo(name = "food_name")
     var name: String,
     @ColumnInfo(name = "food_details")
-    var details: String
+    var details: String,
+    @ColumnInfo(name = "food_price")
+    var price: Double
     //maybe also a num for food number
     )
