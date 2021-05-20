@@ -41,6 +41,6 @@ class OrdersViewModel: ViewModel() {
     }
 
     private fun loadOrder(){
-        ordersList= OrdersManager.getOrdes() as ArrayList<Order>
+        ordersList= OrdersManager.getOrdes()
     }
 }
