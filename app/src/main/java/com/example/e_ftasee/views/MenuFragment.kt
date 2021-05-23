@@ -12,6 +12,7 @@ import android.widget.TextView
 import androidx.fragment.app.*
 import androidx.lifecycle.Lifecycle
 import com.example.e_ftasee.R
+import com.example.e_ftasee.viewmodels.OrdersViewModel
 import com.google.android.material.snackbar.Snackbar
 
 class MenuFragment: ListFragment() {
@@ -48,6 +49,7 @@ class MenuFragment: ListFragment() {
         foodViewModel.selectFoodAt(position)
         listView.setItemChecked(position, true)
         //Log.i("onListItemClick", "cliked");
+
         val userFrag = parentFragmentManager.findFragmentById(R.id.food_details_fragment) as FoodFragment?
                 if (userFrag == null) {
                     val transaction = parentFragmentManager.beginTransaction()

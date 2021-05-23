@@ -9,12 +9,16 @@ import androidx.room.PrimaryKey
 data class Order(
     @PrimaryKey(autoGenerate = true)
     var orderId: Long = 0L,
-    @ColumnInfo(name = "table")
+    //@ColumnInfo(name = "table")
+    @JvmField
     var tableNum: Int,
-    @ColumnInfo(name = "details")
+    @ColumnInfo(name = "food")
     var details: String,
-    @Embedded()
-    var food: ArrayList<Food>
+    @ColumnInfo(name = "price")
+    var totalPrice: Double,
+
+//    @Embedded()
+//    var food: ArrayList<Food>
 )
 
 

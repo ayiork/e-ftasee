@@ -12,20 +12,22 @@ import android.widget.TextView
 import androidx.fragment.app.*
 import androidx.lifecycle.Lifecycle
 import com.example.e_ftasee.R
+import com.example.e_ftasee.models.Food
 import com.example.e_ftasee.viewmodels.OrdersViewModel
 import com.google.android.material.snackbar.Snackbar
 
 class OrdersFragment: ListFragment() {
 
     private lateinit var communicator: ConnectorFragment
-    private val OrdersViewModel: OrdersViewModel by activityViewModels()
+    private val ordersViewModel: OrdersViewModel by activityViewModels()
     @Override
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // We need to use a different list item layout for devices older than Honeycomb
         val layout = android.R.layout.simple_list_item_activated_1
         // Create an array adapter for the list view, using the Ipsum headlines array
-        listAdapter = ArrayAdapter(requireActivity(), layout, OrdersViewModel.getOrdersNames())
+        ordersViewModel.init()
+        listAdapter = ArrayAdapter(requireActivity(), layout, ordersViewModel.getOrdersNames())
         //Log.i("MenuFragmentCreate", foodViewModel.getFoodNames().toString())
     }
     @Override
@@ -46,13 +48,12 @@ class OrdersFragment: ListFragment() {
         //mCallback?.onArticleSelected(position)
 
         // Set the item as checked to be highlighted when in two-pane layout
-        OrdersViewModel.selectOrderAt(position)
+        ordersViewModel.selectOrderAt(position)
         listView.setItemChecked(position, true)
-
-        val userFrag = parentFragmentManager.findFragmentById(R.id.food_details_fragment) as FoodFragment?
+        val userFrag = parentFragmentManager.findFragmentById(R.id.food_details_fragment) as SingleOrderFragment?
                 if (userFrag == null) {
                     val transaction = parentFragmentManager.beginTransaction()
-                    val newFragment = FoodFragment()
+                    val newFragment = SingleOrderFragment()
                     transaction.replace(R.id.fragment_container, newFragment).addToBackStack(null)
                     transaction.commit()
                 }

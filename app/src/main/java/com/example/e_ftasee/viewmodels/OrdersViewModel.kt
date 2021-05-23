@@ -6,19 +6,19 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.e_ftasee.models.Food
 import com.example.e_ftasee.models.Order
-import com.example.e_ftasee.repository.FoodManager
 import com.example.e_ftasee.repository.OrdersManager
 import kotlin.collections.ArrayList
 
 class OrdersViewModel: ViewModel() {
 
-    private lateinit var ordersList: ArrayList<Order>
-    private lateinit var ordersNames: Array<String?>
+    lateinit var repository: OrdersManager
+    private var ordersList: List<Order>  = ArrayList()
+    private lateinit var ordersTables: Array<Int?>
     private var selected = MutableLiveData<Pair<Int, Order>>()
-    private val OrdersManager = OrdersManager()
 
-    init{
-        loadOrder()
+
+    fun init(){
+        loadOrders()
         loadOrderNames()
     }
 
@@ -32,15 +32,29 @@ class OrdersViewModel: ViewModel() {
         selected.value = Pair(position, ordersList[position])
     }
 
-    fun getOrdersNames(): Array<String?>{
-        return ordersNames
+    private fun tableName(num:Int):String{
+        return "Order table: $num"
+    }
+    fun getOrdersNames(): Array<String?> {
+        ordersTables = repository.getOrdersNames()
+        Log.i("orderames",ordersTables.toString())
+        return Array(ordersTables.size) { i -> tableName(ordersTables[i]!!) }
+    }
+
+    // USERORDERVIEWMODEL
+    fun insert(food: Food,tableId:Int){
+        repository.updateOrder(tableId!!,food)
     }
 
     private fun loadOrderNames(){
-        ordersNames = OrdersManager.getOrdersNames()
+        ordersTables = repository.getOrdersNames()
     }
 
-    private fun loadOrder(){
-        ordersList= OrdersManager.getOrdes()
+    private fun loadOrders(){
+        ordersList= repository.getOrders()
+    }
+
+    fun deleteOrders(){
+        repository.deleteOrders()
     }
 }

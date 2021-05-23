@@ -10,14 +10,17 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModel
+import com.example.e_ftasee.FoodApplication
 import com.example.e_ftasee.viewmodels.MainViewModel
 import com.example.e_ftasee.R
 import com.example.e_ftasee.viewmodels.FoodViewModel
+import com.example.e_ftasee.viewmodels.OrdersViewModel
 import com.example.e_ftasee.viewmodels.TcpServerService
 
 class MainActivity : AppCompatActivity(), ConnectorFragment{
 
     private val mainViewModel: MainViewModel by viewModels()
+    private val ordersViewModel: OrdersViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +32,7 @@ class MainActivity : AppCompatActivity(), ConnectorFragment{
         } else {
             startService(Intent(applicationContext, TcpClientService::class.java))
         }*/
+        ordersViewModel.repository = (application as FoodApplication).repository
         if (findViewById<View>(R.id.fragment_container) != null) {
             if (savedInstanceState != null) {
                 return
