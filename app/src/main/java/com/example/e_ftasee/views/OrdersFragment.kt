@@ -50,10 +50,10 @@ class OrdersFragment: ListFragment() {
         // Set the item as checked to be highlighted when in two-pane layout
         ordersViewModel.selectOrderAt(position)
         listView.setItemChecked(position, true)
-        val userFrag = parentFragmentManager.findFragmentById(R.id.food_details_fragment) as SingleOrderFragment?
+        val userFrag = parentFragmentManager.findFragmentById(R.id.food_details_fragment) as AdminOrderFragment?
                 if (userFrag == null) {
                     val transaction = parentFragmentManager.beginTransaction()
-                    val newFragment = SingleOrderFragment()
+                    val newFragment = AdminOrderFragment()
                     transaction.replace(R.id.fragment_container, newFragment).addToBackStack(null)
                     transaction.commit()
                 }

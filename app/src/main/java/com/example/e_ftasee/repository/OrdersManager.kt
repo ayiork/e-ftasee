@@ -27,8 +27,14 @@ class OrdersManager(private val orderDao: OrderDao) {
 //        }
 //    }
 
-    fun getOrder(id:Int):Order?{
-        return orderDao.getOrder(id)
+    //    id:Int
+    fun getMyOrder(id:Int):Order?{
+        //return orderDao.getOrder(id)
+        if (order != null && order!!.tableNum == id) {
+            return order
+        }else
+            return null
+
     }
 
 //    fun getOrdersNames(): Array<String?> {
@@ -41,6 +47,7 @@ class OrdersManager(private val orderDao: OrderDao) {
 //    }
 //
     fun getOrders(): List<Order>{
+        orders= orderDao.getAllOrders()
         return orders;
     }
 
@@ -65,7 +72,7 @@ class OrdersManager(private val orderDao: OrderDao) {
      */
     fun updateOrder(table : Int,food: Food){
        // var tableOrder = "Table $table"
-        if (order==null){
+        if (order==null || order!!.tableNum != table){
             var foodStr: String = food.name+"\n"
             var totalPrice: Double = food.price
 
@@ -75,11 +82,14 @@ class OrdersManager(private val orderDao: OrderDao) {
             order!!.totalPrice+=food.price
             }
         // THIS WILL BE CALLED WHEN PLACE ORDER BUTTON WILL BE PRESSED
-        insertOrderToDB()
+        //insertOrderToDB()
 
     }
     fun insertOrderToDB(){
         orderDao.Insert(order)
+    }
+    fun deleteMyOrder(){
+        order = null
     }
     fun deleteOrders(){
         orderDao.deleteAllOrders()

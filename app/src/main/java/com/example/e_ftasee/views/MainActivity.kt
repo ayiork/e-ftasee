@@ -76,6 +76,12 @@ class MainActivity : AppCompatActivity(), ConnectorFragment{
             transaction.replace(R.id.fragment_container, newFragment).addToBackStack(null)
             transaction.commit()
         }
+        if(choice == 4){
+            val transaction = supportFragmentManager.beginTransaction()
+            val newFragment = SingleOrderFragment()
+            transaction.replace(R.id.fragment_container, newFragment).addToBackStack(null)
+            transaction.commit()
+        }
     }
 
     override fun loginPage() {

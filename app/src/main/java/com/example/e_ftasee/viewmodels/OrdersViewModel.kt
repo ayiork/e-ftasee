@@ -18,6 +18,7 @@ class OrdersViewModel: ViewModel() {
 
 
     fun init(){
+        //deleteOrders()
         loadOrders()
         loadOrderNames()
     }
@@ -29,6 +30,7 @@ class OrdersViewModel: ViewModel() {
 
     fun selectOrderAt(position: Int) {
         //Log.i("selectfood", selectedFood.value.toString());
+        loadOrders()
         selected.value = Pair(position, ordersList[position])
     }
 
@@ -41,6 +43,10 @@ class OrdersViewModel: ViewModel() {
         return Array(ordersTables.size) { i -> tableName(ordersTables[i]!!) }
     }
 
+    fun getMyOrder(tableId: Int):Order?{
+       return repository.getMyOrder(tableId)
+    }
+
     // USERORDERVIEWMODEL
     fun insert(food: Food,tableId:Int){
         repository.updateOrder(tableId!!,food)
@@ -50,6 +56,9 @@ class OrdersViewModel: ViewModel() {
         ordersTables = repository.getOrdersNames()
     }
 
+    fun placeOrder(){
+        repository.insertOrderToDB()
+    }
     private fun loadOrders(){
         ordersList= repository.getOrders()
     }

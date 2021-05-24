@@ -17,7 +17,7 @@ import com.example.e_ftasee.viewmodels.FoodViewModel
 import com.example.e_ftasee.viewmodels.MainViewModel
 import com.example.e_ftasee.viewmodels.OrdersViewModel
 
-class SingleOrderFragment: Fragment(),View.OnClickListener  {
+class AdminOrderFragment: Fragment()  {
 
     private val orderViewModel: OrdersViewModel by activityViewModels()
     private val mainViewModel: MainViewModel by activityViewModels()
@@ -33,43 +33,22 @@ class SingleOrderFragment: Fragment(),View.OnClickListener  {
 
         vieww = inflater.inflate(R.layout.order_layout, container, false) as View
         order = vieww.findViewById(R.id.ordertext) as TextView
-        val addToOrderBut: Button = vieww!!.findViewById(R.id.place_order_button) as Button
-        addToOrderBut.setOnClickListener(this)
+        val b:View = vieww!!.findViewById(R.id.place_order_button)
+        b.setVisibility(View.GONE)
+//        addToOrderBut.setOnClickListener(this)
         return vieww
     }
 
     @Override
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        orderViewModel.getSelectedFood().observe(viewLifecycleOwner, {
-//            Log.i("SingleOrderFragment", "onViewCreated");
-//            order.text = it.second.details +"\n\n"  + "\nprice: €"+ it.second.totalPrice
-//            mCurrentPosition = it.first
-//        })
-        var table:Int=0
-        mainViewModel.givenID().observeForever(){id->table=id}
-        Log.i("SingleOrderFragment", table.toString());
-        var ord: Order? = orderViewModel.getMyOrder(table)
-        if (ord !=null)
-            order.text = ord!!.details +"\n\n" + "price: €" + ord!!.totalPrice
-    }
-
-    @Override
-    override fun onClick(v: View?) {
-
-//        lateinit var f: Food
-//        var table:Int=0
-//        mainViewModel.givenID().observe(this){id->table=id}
-        orderViewModel.placeOrder()
-        Log.i("placeOrder","ordedr placed")
-
-        Toast.makeText(activity,"Order placed", Toast.LENGTH_SHORT).show()
+        orderViewModel.getSelectedFood().observe(viewLifecycleOwner, {
+            Log.i("SingleOrderFragment", "onViewCreated");
+            order.text = it.second.details +"\n\n"  + "\nprice: €"+ it.second.totalPrice
+            mCurrentPosition = it.first
+        })
 
     }
 
-    @Override
-    override fun onDestroyView(){
-        super.onDestroyView()
-        mainViewModel.givenID().removeObservers(this)
-    }
+
 }
