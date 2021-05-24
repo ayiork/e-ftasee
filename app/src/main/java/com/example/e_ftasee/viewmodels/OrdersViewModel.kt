@@ -71,11 +71,11 @@ class OrdersViewModel: ViewModel() {
 
     fun placeOrder(tableId: Int){
         viewModelScope.launch(Dispatchers.IO) {
-            repository.insertOrderToDB()
             var order = getMyOrder(tableId)
             var msg = order?.details + order?.totalPrice.toString()
             if (msg != null) {
                 client.sendMsg(tableId, msg)
+                repository.insertOrderToDB()
             }
         }
     }
