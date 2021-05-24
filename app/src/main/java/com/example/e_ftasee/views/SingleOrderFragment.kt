@@ -35,6 +35,7 @@ class SingleOrderFragment: Fragment(),View.OnClickListener  {
         order = vieww.findViewById(R.id.ordertext) as TextView
         val addToOrderBut: Button = vieww!!.findViewById(R.id.place_order_button) as Button
         addToOrderBut.setOnClickListener(this)
+        addToOrderBut.visibility=View.GONE
         return vieww
     }
 
@@ -50,8 +51,11 @@ class SingleOrderFragment: Fragment(),View.OnClickListener  {
         mainViewModel.givenID().observeForever(){id->table=id}
         Log.i("SingleOrderFragment", table.toString());
         var ord: Order? = orderViewModel.getMyOrder(table)
-        if (ord !=null)
-            order.text = ord!!.details +"\n\n" + "price: €" + ord!!.totalPrice
+        if (ord !=null) {
+            val addToOrderBut: Button = vieww!!.findViewById(R.id.place_order_button) as Button
+            addToOrderBut.visibility=View.VISIBLE
+            order.text = ord!!.details + "\n\n" + "price: €" + ord!!.totalPrice
+        }
     }
 
     @Override
@@ -60,7 +64,8 @@ class SingleOrderFragment: Fragment(),View.OnClickListener  {
 //        lateinit var f: Food
         var table:Int=0
         mainViewModel.givenID().observe(this){id->table=id}
-        orderViewModel.placeOrder(table)
+        if (table!=0)
+            orderViewModel.placeOrder(table)
         Log.i("placeOrder","ordedr placed")
 
         Toast.makeText(activity,"Order placed", Toast.LENGTH_SHORT).show()
