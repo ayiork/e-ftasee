@@ -23,4 +23,6 @@
     <string name="feedbackStaff">Feedback for the staff</string>
     <string name="feedbackFood">Feedback for the experience and the food</string>
     <string name="thankyou">Thank you for your time!</string>
+    <string name="add_to_order_button">Add to order</string>
+    <string name="place_order_button">Place order</string>
 </resources>
