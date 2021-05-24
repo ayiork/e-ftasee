@@ -13,6 +13,7 @@
         android:layout_marginBottom="60dp"
         android:background="#00F9A825"
         android:fontFamily="cursive"
+        android:gravity="center_vertical"
         android:text="@string/fast"
         android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/editTextNumberDecimal"

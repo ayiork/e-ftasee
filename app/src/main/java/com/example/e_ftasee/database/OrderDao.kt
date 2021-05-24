@@ -19,8 +19,7 @@ interface OrderDao {
 //    fun InsertOrderWithFood(order: Order, food: List<Food>)
 
     @Update
-    fun  //(onConflict = OnConflictStrategy.REPLACE)
-            Update(order: Order?)
+    fun Update(order: Order?)
 
     @Delete
     fun Delete(order: Order?)
