@@ -20,7 +20,7 @@ class FeedbackFragment: Fragment() {
 
         val feedback1 =  feedback_fragment?.findViewById<View>(R.id.editTextTextPersonName3) as EditText
         val feedback2 =  feedback_fragment?.findViewById<View>(R.id.editTextTextPersonName2) as EditText
-        val feedback = "Feedback for staff: "+feedback1.text+" Feedback for experience/food: "+feedback2.text
+        val feedback = "Feedback for staff: "+feedback1.text.toString()+" Feedback for experience/food: "+feedback2.text.toString()
         val button =  feedback_fragment?.findViewById<View>(R.id.button5) as Button
         button.setOnClickListener{
             communicator.feedback(feedback)
