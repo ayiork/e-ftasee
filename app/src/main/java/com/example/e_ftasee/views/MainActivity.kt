@@ -42,7 +42,10 @@ class MainActivity : AppCompatActivity(), ConnectorFragment{
     }
 
     private fun startServerService() {
+//        var intent= Intent(applicationContext, TcpServerService::class.java)
+//        intent.putExtra((application as FoodApplication).repositoryMsg)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+
             startForegroundService(Intent(applicationContext, TcpServerService::class.java))
         } else {
             startService(Intent(applicationContext, TcpServerService::class.java))

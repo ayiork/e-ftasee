@@ -10,8 +10,8 @@ class UsersRepository {
     init {
         if (users.isEmpty()){
             users.add(User("andreasnaoum","andreasnaoum123","Andreas Naoum"))
-            users.add(User("ayiork","ayiork123","Andreas Yiorkatzi"))
-            users.add(User("andreasshiamtanis","andreasshiamtanis123", "Andreas Yiorkatzi"))
+            users.add(User("a","aa","Andreas Yiorkatzi"))
+            users.add(User("andreasshiamtanis","andreasshiamtanis123", "Andreas Shiamtanis"))
         }
     }
 

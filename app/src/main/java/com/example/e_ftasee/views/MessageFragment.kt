@@ -54,6 +54,7 @@ class MessageFragment:ListFragment() {
 
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     @Override
     override fun onListItemClick(l: ListView, v: View, position: Int, id: Long) {
         // Notify the parent activity of selected item

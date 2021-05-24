@@ -25,8 +25,6 @@ class MessageViewModel: ViewModel() {
 
         fun init(){
             loadMessages()
-            insert("table 5","Thelw kafeee")
-            insert("table 6","Thelw nargile")
         }
 
         // here can be added another int to show the amount of food

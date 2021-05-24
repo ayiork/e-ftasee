@@ -1,6 +1,7 @@
 package com.example.e_ftasee.views
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.ListView
@@ -31,6 +32,7 @@ class OrdersFragment: ListFragment() {
                 var names: MutableList<String> = ArrayList()
                 for (order in orders!!)
                     names.add("Table Number: " + order!!.tableNum)
+                Log.i("SingleOrderFragment", "onViewCreated")
                 listAdapter = ArrayAdapter(requireActivity(), layout,names)
 
             }
