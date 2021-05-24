@@ -14,17 +14,16 @@ class Client {
 
     private var socket: Socket? = null
     private var msg= "Hello love"
-    //var counter = 1
 
     companion object {
         private const val SERVERPORT = 9999
         private const val SERVER_IP = "127.0.0.1"
         var counter = 1
-        //private const val SERVER_IP = "10.0.2.2"
     }
 
-    fun sendMsg(message: String){
-        msg= "Order $counter $message"
+    fun sendMsg(table: Int,message: String){
+        //Order $counter
+        msg= "Table $table ,$message"
         counter++
         Thread(ClientThread()).start()
     }

@@ -2,7 +2,7 @@
     <string name="app_name">eftasee</string>
     <string name="fast">QUICK-EASY-SIMPLE ORDER</string>
     <string name="logo">eftasee logo</string>
-    <string name="hint_table_code">Write your table code here</string>
+    <string name="hint_table_code">Write your table code here   </string>
     <string name="submit">Submit</string>
     <string name="call_waiter">Call a waiter</string>
     <string name="request_bill">Request the bill</string>
@@ -10,8 +10,17 @@
     <string name="my_order">My Order</string>
     <string name="feedback">Give Feedback</string>
     <string name="welcome_restaurant">Welcome to Andreas\' Restaurant</string>
-    <string name="owner">Owner</string>
+    <string name="owner">Admin Log In</string>
     <string name="login">Log in</string>
     <string name="username">username</string>
     <string name="password">password</string>
+    <string name="invalid">Invalid username/password, please give the correct one!</string>
+    <string name="clientBill">Client want the bill.</string>
+    <string name="clientWaiter">Client want a waiter/waitress</string>
+    <string name="wrongCode">Wrong code, please give the correct one!</string>
+    <string name="waiterCalled">A waiter/waitress is called.</string>
+    <string name="billComing">"Your bill is coming!"</string>
+    <string name="feedbackStaff">Feedback for the staff</string>
+    <string name="feedbackFood">Feedback for the experience and the food</string>
+    <string name="thankyou">Thank you for your time!</string>
 </resources>

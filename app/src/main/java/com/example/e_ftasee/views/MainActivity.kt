@@ -1,37 +1,29 @@
 package com.example.e_ftasee.views
 
+import android.content.Context
 import android.content.Intent
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModel
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentManager
 import com.example.e_ftasee.FoodApplication
-import com.example.e_ftasee.viewmodels.MainViewModel
 import com.example.e_ftasee.R
-import com.example.e_ftasee.viewmodels.FoodViewModel
+import com.example.e_ftasee.viewmodels.MainViewModel
 import com.example.e_ftasee.viewmodels.OrdersViewModel
 import com.example.e_ftasee.viewmodels.TcpServerService
 
 class MainActivity : AppCompatActivity(), ConnectorFragment{
 
+    lateinit var context: Context
     private val mainViewModel: MainViewModel by viewModels()
     private val ordersViewModel: OrdersViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        startServerService()
-        /*
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            startForegroundService(Intent(applicationContext, TcpClientService::class.java))
-        } else {
-            startService(Intent(applicationContext, TcpClientService::class.java))
-        }*/
         ordersViewModel.repository = (application as FoodApplication).repository
         if (findViewById<View>(R.id.fragment_container) != null) {
             if (savedInstanceState != null) {
@@ -44,13 +36,14 @@ class MainActivity : AppCompatActivity(), ConnectorFragment{
         }
     }
 
-    fun startServerService() {
+    private fun startServerService() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             startForegroundService(Intent(applicationContext, TcpServerService::class.java))
         } else {
             startService(Intent(applicationContext, TcpServerService::class.java))
         }
     }
+
 
     override fun passCode(editTextInput: Int) {
         if (mainViewModel.tableCode(editTextInput)){
@@ -60,17 +53,23 @@ class MainActivity : AppCompatActivity(), ConnectorFragment{
             transaction.commit()
         }
         else
-            Toast.makeText(this,"Wrong code, please give the correct one!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this,this.getString(R.string.wrongCode), Toast.LENGTH_SHORT).show()
     }
 
     override fun tableChoice(choice: Int) {
         if (choice==1) {
-            mainViewModel.sendMessage("Table " + mainViewModel.givenID().value + ", Client want a waiter/waitress")
-
+            var id: Int? = mainViewModel.givenID().value
+            if (id != null) {
+                mainViewModel.sendMessage(id,this.getString(R.string.clientWaiter))
+            }
         }
-        if (choice==2)
-            mainViewModel.sendMessage("Table "+mainViewModel.givenID().value+"Client want the bill.")
-        if(choice==3){
+        else if (choice==2){
+            var id: Int? = mainViewModel.givenID().value
+            if (id != null) {
+                mainViewModel.sendMessage(id,this.getString(R.string.clientBill))
+            }
+        }
+        else if(choice==3){
             val transaction = supportFragmentManager.beginTransaction()
             val newFragment = MenuFragment()
             transaction.replace(R.id.fragment_container, newFragment).addToBackStack(null)
@@ -79,6 +78,12 @@ class MainActivity : AppCompatActivity(), ConnectorFragment{
         if(choice == 4){
             val transaction = supportFragmentManager.beginTransaction()
             val newFragment = SingleOrderFragment()
+            transaction.replace(R.id.fragment_container, newFragment).addToBackStack(null)
+            transaction.commit()
+        }
+        else if(choice==5){
+            val transaction = supportFragmentManager.beginTransaction()
+            val newFragment = FeedbackFragment()
             transaction.replace(R.id.fragment_container, newFragment).addToBackStack(null)
             transaction.commit()
         }
@@ -93,15 +98,24 @@ class MainActivity : AppCompatActivity(), ConnectorFragment{
 
     override fun login(user: String, pass: String) {
         if (mainViewModel.auth(user,pass)){
-            //startServerService()
+            startServerService()
+            //mainViewModel.setContext(applicationContext)
             val transaction = supportFragmentManager.beginTransaction()
             val newFragment = OrdersFragment()
             transaction.replace(R.id.fragment_container, newFragment).addToBackStack(null)
             transaction.commit()
         }
         else
-            Toast.makeText(this,"Invalid username/password, please give the correct one!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this,this.getString(R.string.invalid), Toast.LENGTH_SHORT).show()
+    }
 
+    override fun feedback(feedback: String){
+        var id: Int? = mainViewModel.givenID().value
+        if (id != null) {
+            mainViewModel.sendMessage(id,feedback)
+        }
+        val fragmentManager: FragmentManager = supportFragmentManager
+        fragmentManager.popBackStack()
     }
 
 }

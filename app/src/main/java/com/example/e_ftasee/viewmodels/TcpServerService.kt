@@ -13,7 +13,6 @@ import android.util.Log
 import androidx.core.app.NotificationCompat
 import com.example.e_ftasee.R
 import java.io.DataInputStream
-import java.io.DataOutputStream
 import java.io.IOException
 import java.net.ServerSocket
 import java.net.Socket
@@ -23,6 +22,7 @@ class TcpServerService : Service() {
 
         private var serverSocket: ServerSocket? = null
         private val working = AtomicBoolean(true)
+
         private val runnable = Runnable {
             var socket: Socket? = null
             try {
@@ -30,26 +30,27 @@ class TcpServerService : Service() {
                 while (working.get()) {
                     if (serverSocket != null) {
                         socket = serverSocket!!.accept()
-                        Log.i(TAG, "New client: $socket")
+                        Log.i("Server","New client: $socket")
                         val dataInputStream = DataInputStream(socket.getInputStream())
-                        val dataOutputStream = DataOutputStream(socket.getOutputStream())
-
-                        // Use threads for each client to communicate with them simultaneously
-                        val t: Thread = TcpClientHandler(dataInputStream, dataOutputStream)
+                        val t: Thread = TcpClientHandler(dataInputStream)
                         t.start()
-                    } else {
-                        Log.e(TAG, "Couldn't create ServerSocket!")
                     }
                 }
             } catch (e: IOException) {
-                e.printStackTrace()
+                //e.printStackTrace()
                 try {
                     socket?.close()
                 } catch (ex: IOException) {
-                    ex.printStackTrace()
+                    //ex.printStackTrace()
                 }
             }
         }
+
+        /*
+         val dataOutputStream = DataOutputStream(socket.getOutputStream())
+        , dataOutputStream
+        //dataOutputStream.writeUTF("Hello Client")
+         */
 
         override fun onBind(intent: Intent): IBinder? {
             return null
@@ -76,7 +77,7 @@ class TcpServerService : Service() {
                 val notificationBuilder = NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID)
                 val notification = notificationBuilder.setOngoing(true)
                     .setSmallIcon(R.drawable.ic_launcher_foreground)
-                    .setContentTitle("Tcp Server is running in background")
+                    .setContentTitle("e-ftasee is running in background, you can receive messages/orders from your clients")
                     .setPriority(NotificationManager.IMPORTANCE_MIN)
                     .setCategory(Notification.CATEGORY_SERVICE)
                     .build()
@@ -87,7 +88,7 @@ class TcpServerService : Service() {
         }
 
         companion object {
-            private val TAG = TcpServerService::class.java.simpleName
+            //private val TAG = TcpServerService::class.java.simpleName
             private const val PORT = 9999
         }
 }

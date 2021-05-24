@@ -6,5 +6,6 @@ interface ConnectorFragment {
     fun tableChoice(choice: Int)
     fun loginPage()
     fun login(user: String, pass: String)
+    fun feedback(feedback: String)
 
 }
