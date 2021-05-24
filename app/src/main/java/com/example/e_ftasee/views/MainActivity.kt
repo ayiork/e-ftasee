@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import com.example.e_ftasee.FoodApplication
 import com.example.e_ftasee.R
+import com.example.e_ftasee.repository.MessageRepository
 import com.example.e_ftasee.viewmodels.MainViewModel
 import com.example.e_ftasee.viewmodels.MessageViewModel
 import com.example.e_ftasee.viewmodels.OrdersViewModel
@@ -23,12 +24,12 @@ class MainActivity : AppCompatActivity(), ConnectorFragment{
     private val ordersViewModel: OrdersViewModel by viewModels()
     private val messageViewModel: MessageViewModel by viewModels()
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         ordersViewModel.repository = (application as FoodApplication).repository
         messageViewModel.repositoryMsg = (application as FoodApplication).repositoryMsg
-        startServerService()
         if (findViewById<View>(R.id.fragment_container) != null) {
             if (savedInstanceState != null) {
                 return
@@ -103,6 +104,7 @@ class MainActivity : AppCompatActivity(), ConnectorFragment{
     override fun login(user: String, pass: String) {
         if (mainViewModel.auth(user,pass)){
             //mainViewModel.setContext(applicationContext)
+            startServerService()
             val transaction = supportFragmentManager.beginTransaction()
             val newFragment = MessageFragment()
             transaction.replace(R.id.fragment_container, newFragment).addToBackStack(null)
@@ -121,4 +123,8 @@ class MainActivity : AppCompatActivity(), ConnectorFragment{
         fragmentManager.popBackStack()
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        //applicationContext.stopService(TcpServerService::class.java)
+    }
 }

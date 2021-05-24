@@ -25,6 +25,7 @@ abstract class OrderDatabase : RoomDatabase() {
                     // Allow queries on the main thread.
                     // Don't do this on a real app!
                     //.allowMainThreadQueries()
+                    .fallbackToDestructiveMigration()
                     .build()
                 return INSTANCE
             }

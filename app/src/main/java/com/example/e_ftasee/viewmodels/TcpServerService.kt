@@ -11,7 +11,10 @@ import android.os.Build
 import android.os.IBinder
 import android.util.Log
 import androidx.core.app.NotificationCompat
+import com.example.e_ftasee.FoodApplication
 import com.example.e_ftasee.R
+import com.example.e_ftasee.repository.MessageRepository
+import com.example.e_ftasee.views.MainActivity
 import java.io.DataInputStream
 import java.io.IOException
 import java.net.ServerSocket
@@ -22,17 +25,19 @@ class TcpServerService : Service() {
 
         private var serverSocket: ServerSocket? = null
         private val working = AtomicBoolean(true)
+        private lateinit var repositoryMsg: MessageRepository
 
         private val runnable = Runnable {
             var socket: Socket? = null
             try {
+                repositoryMsg = (application as FoodApplication).repositoryMsg
                 serverSocket = ServerSocket(PORT)
                 while (working.get()) {
                     if (serverSocket != null) {
                         socket = serverSocket!!.accept()
                         Log.i("Server","New client: $socket")
                         val dataInputStream = DataInputStream(socket.getInputStream())
-                        val t: Thread = TcpClientHandler(dataInputStream)
+                        val t: Thread = TcpClientHandler(dataInputStream,repositoryMsg)
                         t.start()
                     }
                 }

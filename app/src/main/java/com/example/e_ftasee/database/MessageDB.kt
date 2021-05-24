@@ -25,6 +25,7 @@ abstract class MessageDB: RoomDatabase()  {
                     // Allow queries on the main thread.
                     // Don't do this on a real app!
                     //.allowMainThreadQueries()
+                    .fallbackToDestructiveMigration()
                     .build()
                 //Log.i("messageDB","synchronized instance")
                 return INSTANCE
