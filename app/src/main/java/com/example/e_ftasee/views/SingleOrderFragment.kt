@@ -58,9 +58,9 @@ class SingleOrderFragment: Fragment(),View.OnClickListener  {
     override fun onClick(v: View?) {
 
 //        lateinit var f: Food
-//        var table:Int=0
-//        mainViewModel.givenID().observe(this){id->table=id}
-        orderViewModel.placeOrder()
+        var table:Int=0
+        mainViewModel.givenID().observe(this){id->table=id}
+        orderViewModel.placeOrder(table)
         Log.i("placeOrder","ordedr placed")
 
         Toast.makeText(activity,"Order placed", Toast.LENGTH_SHORT).show()

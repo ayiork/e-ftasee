@@ -15,6 +15,7 @@ class OrdersViewModel: ViewModel() {
     private var ordersList: List<Order>  = ArrayList()
     private lateinit var ordersTables: Array<Int?>
     private var selected = MutableLiveData<Pair<Int, Order>>()
+    private var client: Client = Client()
 
 
     fun init(){
@@ -56,8 +57,13 @@ class OrdersViewModel: ViewModel() {
         ordersTables = repository.getOrdersNames()
     }
 
-    fun placeOrder(){
+    fun placeOrder(tableId: Int){
         repository.insertOrderToDB()
+        var order = getMyOrder(tableId)
+        var msg = order?.details + order?.totalPrice.toString()
+        if (msg != null) {
+            client.sendMsg(tableId,msg)
+        }
     }
     private fun loadOrders(){
         ordersList= repository.getOrders()

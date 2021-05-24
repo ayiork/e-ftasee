@@ -25,6 +25,7 @@ class MainActivity : AppCompatActivity(), ConnectorFragment{
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         ordersViewModel.repository = (application as FoodApplication).repository
+        startServerService()
         if (findViewById<View>(R.id.fragment_container) != null) {
             if (savedInstanceState != null) {
                 return
@@ -98,7 +99,6 @@ class MainActivity : AppCompatActivity(), ConnectorFragment{
 
     override fun login(user: String, pass: String) {
         if (mainViewModel.auth(user,pass)){
-            startServerService()
             //mainViewModel.setContext(applicationContext)
             val transaction = supportFragmentManager.beginTransaction()
             val newFragment = OrdersFragment()

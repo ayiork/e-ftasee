@@ -1,8 +1,11 @@
 package com.example.e_ftasee.viewmodels
 
 import android.util.Log
+import com.example.e_ftasee.models.ClientMessage
 import java.io.DataInputStream
 import java.io.IOException
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 //, private val rep: MessageRepository
 class TcpClientHandler(private val dataInputStream: DataInputStream) : Thread() {
@@ -14,12 +17,16 @@ class TcpClientHandler(private val dataInputStream: DataInputStream) : Thread() 
             try {
                 if(dataInputStream.available() > 0){
                     val msg = dataInputStream.readUTF()
+                    val msgparts = msg.split(",").toTypedArray()
+                    val current = LocalDateTime.now()
+                    val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+                    val formatted = current.format(formatter).toString()
+                    var message: ClientMessage = ClientMessage(msgparts[0],msgparts[1],formatted)
                     /*
                     val msgparts = msg.split(",").toTypedArray()
                     val current = LocalDateTime.now()
                     val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
                     val formatted = current.format(formatter).toString()
-
                     var message: ClientMessage = ClientMessage(msgparts[0],msgparts[1],formatted)
                     rep.insert(message)
                     */

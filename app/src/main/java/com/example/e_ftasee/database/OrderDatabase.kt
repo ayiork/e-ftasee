@@ -4,9 +4,10 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.e_ftasee.models.ClientMessage
 import com.example.e_ftasee.models.Order
 
-@Database(entities = [Order::class] , version = 1, exportSchema = false)
+@Database(entities = [Order::class, ClientMessage::class] , version = 1, exportSchema = false)
 abstract class OrderDatabase : RoomDatabase() {
     private val instance: OrderDatabase? = null
     abstract fun orderDao(): OrderDao

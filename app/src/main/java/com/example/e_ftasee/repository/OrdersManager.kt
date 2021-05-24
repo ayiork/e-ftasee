@@ -1,13 +1,8 @@
 package com.example.e_ftasee.repository
 
-import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Transformations
 import com.example.e_ftasee.database.OrderDao
 import com.example.e_ftasee.models.Food
 import com.example.e_ftasee.models.Order
-import com.example.e_ftasee.models.Table
-import com.example.e_ftasee.viewmodels.FoodViewModel
 
 class OrdersManager(private val orderDao: OrderDao) {
 
