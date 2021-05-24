@@ -4,15 +4,18 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.e_ftasee.models.Food
 import com.example.e_ftasee.models.Order
 import com.example.e_ftasee.repository.OrdersManager
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlin.collections.ArrayList
 
 class OrdersViewModel: ViewModel() {
 
     lateinit var repository: OrdersManager
-    private var ordersList: List<Order>  = ArrayList()
+    private lateinit var ordersList: LiveData<List<Order>>
     private lateinit var ordersTables: Array<Int?>
     private var selected = MutableLiveData<Pair<Int, Order>>()
     private var client: Client = Client()
@@ -21,7 +24,7 @@ class OrdersViewModel: ViewModel() {
     fun init(){
         //deleteOrders()
         loadOrders()
-        loadOrderNames()
+        //loadOrderNames()
     }
 
     // here can be added another int to show the amount of food
@@ -29,20 +32,31 @@ class OrdersViewModel: ViewModel() {
         return selected
     }
 
-    fun selectOrderAt(position: Int) {
+//    fun selectOrderAt(position: Int) {
+//        //Log.i("selectfood", selectedFood.value.toString());
+//        loadOrders()
+//        selected.value = Pair(position, ordersList[position])
+//    }
+
+    fun selectOrderAt(position: Int,ord:Order) {
         //Log.i("selectfood", selectedFood.value.toString());
-        loadOrders()
-        selected.value = Pair(position, ordersList[position])
+        //loadOrders()
+        selected.value = Pair(position,ord)
     }
 
     private fun tableName(num:Int):String{
         return "Order table: $num"
     }
-    fun getOrdersNames(): Array<String?> {
-        ordersTables = repository.getOrdersNames()
-        Log.i("orderames",ordersTables.toString())
-        return Array(ordersTables.size) { i -> tableName(ordersTables[i]!!) }
+
+    fun getOrdersList():LiveData<List<Order>>{
+        return ordersList
     }
+
+//    fun getOrdersNames(): Array<String?> {
+//        ordersTables = repository.getOrdersNames()
+//        Log.i("orderames",ordersTables.toString())
+//        return Array(ordersTables.size) { i -> tableName(ordersTables[i]!!) }
+//    }
 
     fun getMyOrder(tableId: Int):Order?{
        return repository.getMyOrder(tableId)
@@ -53,16 +67,18 @@ class OrdersViewModel: ViewModel() {
         repository.updateOrder(tableId!!,food)
     }
 
-    private fun loadOrderNames(){
-        ordersTables = repository.getOrdersNames()
-    }
+//    private fun loadOrderNames(){
+//        ordersTables = repository.getOrdersNames()
+//    }
 
     fun placeOrder(tableId: Int){
-        repository.insertOrderToDB()
-        var order = getMyOrder(tableId)
-        var msg = order?.details + order?.totalPrice.toString()
-        if (msg != null) {
-            client.sendMsg(tableId,msg)
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.insertOrderToDB()
+            var order = getMyOrder(tableId)
+            var msg = order?.details + order?.totalPrice.toString()
+            if (msg != null) {
+                client.sendMsg(tableId, msg)
+            }
         }
     }
     private fun loadOrders(){

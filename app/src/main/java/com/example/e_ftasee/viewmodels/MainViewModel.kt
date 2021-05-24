@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModel
 import com.example.e_ftasee.models.ClientMessage
 import com.example.e_ftasee.models.Table
 import com.example.e_ftasee.models.User
-import com.example.e_ftasee.repository.MessagesManualRepository
 import com.example.e_ftasee.repository.TableRepository
 import com.example.e_ftasee.repository.UsersRepository
 
@@ -23,16 +22,10 @@ class MainViewModel : ViewModel(){
     private lateinit var messagesList: ArrayList<ClientMessage>
     private lateinit var messagesNames: Array<String?>
     private var selected = MutableLiveData<Pair<Int, ClientMessage>>()
-    private lateinit var messagesRep: MessagesManualRepository
     private var appContext:Context? = null
 
     init{
      //
-    }
-
-    fun setContext(context: Context){
-        appContext=context
-        messagesRep== MessagesManualRepository(context)
     }
 
     private fun loadTables(){
@@ -75,26 +68,6 @@ class MainViewModel : ViewModel(){
         client.sendMsg(table, msg)
     }
 
-    // here can be added another int to show the amount of food
-    fun getSelectedMessage(): LiveData<Pair<Int, ClientMessage>> {
-        return selected
-    }
-
-    fun selectOrderAt(position: Int) {
-        selected.value = Pair(position, messagesList[position])
-    }
-
-    fun getMessagesNames(): Array<String?>{
-        return messagesNames
-    }
-
-    private fun loadMessagesNames(){
-        messagesNames = messagesRep.getMessagesNames()
-    }
-
-    private fun loadMessages(){
-        messagesList= messagesRep.getMessages() as ArrayList<ClientMessage>
-    }
 
 
 }

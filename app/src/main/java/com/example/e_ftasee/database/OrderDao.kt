@@ -12,14 +12,14 @@ import com.example.e_ftasee.models.Order
 @Dao
 interface OrderDao {
 
-    @Insert
-    fun Insert(order: Order?)
+    @Insert (onConflict = OnConflictStrategy.REPLACE)
+    suspend fun Insert(order: Order?)
 
 //    @Insert
 //    fun InsertOrderWithFood(order: Order, food: List<Food>)
 
-    @Update
-    fun Update(order: Order?)
+//    @Update
+//    fun Update(order: Order?)
 
     @Delete
     fun Delete(order: Order?)
@@ -31,7 +31,7 @@ interface OrderDao {
 //    fun getAllOrders(): LiveData<List<Order>> //updates and returns
 
     @Query("SELECT * FROM orders_table")
-    fun getAllOrders(): List<Order> //updates and returns
+    fun getAllOrders(): LiveData<List<Order>> //updates and returns
 
     @Query("SELECT * FROM orders_table WHERE tableNum = :key")
     fun getOrder(key: Int): Order? //updates and returns

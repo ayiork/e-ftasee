@@ -1,12 +1,13 @@
 package com.example.e_ftasee.repository
 
+import androidx.lifecycle.LiveData
 import com.example.e_ftasee.database.OrderDao
 import com.example.e_ftasee.models.Food
 import com.example.e_ftasee.models.Order
 
 class OrdersManager(private val orderDao: OrderDao) {
 
-    private var orders: List<Order> = orderDao.getAllOrders()
+    private var orders: LiveData<List<Order>> = orderDao.getAllOrders()
     private var order: Order? = null
     //private val foodViewModel: FoodViewModel by activityViewModels()
 
@@ -41,19 +42,19 @@ class OrdersManager(private val orderDao: OrderDao) {
 //        return names
 //    }
 //
-    fun getOrders(): List<Order>{
-        orders= orderDao.getAllOrders()
-        return orders;
+    fun getOrders(): LiveData<List<Order>>{
+        //orders= orderDao.getAllOrders()
+        return orders
     }
 
-    fun getOrdersNames(): Array<Int?> {
-        orders=orderDao.getAllOrders()
-        val tableNums = arrayOfNulls<Int>(orders.size)
-        orders.forEachIndexed { i, order ->
-            tableNums[i] = order.tableNum
-        }
-        return tableNums
-    }
+//    fun getOrdersNames(): Array<Int?> {
+//        //orders=orderDao.getAllOrders()
+//        val tableNums = arrayOfNulls<Int>(orders.size)
+//        orders.forEachIndexed { i, order ->
+//            tableNums[i] = order.tableNum
+//        }
+//        return tableNums
+//    }
 
     /*
     fun insertOrder(table : Int,food: ArrayList<Food>){
@@ -80,7 +81,7 @@ class OrdersManager(private val orderDao: OrderDao) {
         //insertOrderToDB()
 
     }
-    fun insertOrderToDB(){
+    suspend fun insertOrderToDB(){
         orderDao.Insert(order)
     }
     fun deleteMyOrder(){

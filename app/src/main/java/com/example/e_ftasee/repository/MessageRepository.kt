@@ -1,64 +1,42 @@
 package com.example.e_ftasee.repository
 
 import android.content.Context
+import android.os.Build
+import android.telecom.Call
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import com.example.e_ftasee.database.MessageDB
+import com.example.e_ftasee.database.MessageDao
+import com.example.e_ftasee.database.OrderDao
 import com.example.e_ftasee.models.ClientMessage
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 //private val messageDao: MessageDao
-class MessageRepository() {
+@RequiresApi(Build.VERSION_CODES.O)
+class MessageRepository(private val messageDao: MessageDao) {
+    private lateinit var messages:LiveData<List<ClientMessage>>
 
-    /*
-    fun getMessages(): ClientMessage {
-        return messageDao.getMessage()
+    init{
+        val current = LocalDateTime.now()
+        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+        val formatted = current.format(formatter).toString()
+        messages = messageDao.getDateMessages(formatted)
     }
 
-    fun insert(clientMessage: ClientMessage) {
-        messageDao.insert(clientMessage)
+    fun getMessages():LiveData<List<ClientMessage>>{
+        return messages
     }
 
-    fun count(): Int {
-        return messageDao.countUsers()
+    suspend fun insertMessage(name: String,details: String){
+        val current = LocalDateTime.now()
+        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+        val formatted = current.format(formatter).toString()
+        var msg = ClientMessage(name= name,details= details,date= formatted)
+        messageDao.insert(msg)
     }
-
-    fun update(clientMessage: ClientMessage) {
-        messageDao.update(clientMessage)
-    }
-    */
-    companion object {
-
-        var messageDatabase: MessageDB? = null
-
-        var clientMsg: LiveData<ClientMessage>? = null
-
-        fun initializeDB(context: Context) : MessageDB? {
-            return MessageDB.getClientMessageDatabase(context)
-        }
-
-        fun insertData(context: Context, name: String, details: String,date: String) {
-
-            messageDatabase = initializeDB(context)
-
-            CoroutineScope(IO).launch {
-                val msg = ClientMessage(name, details,date)
-                messageDatabase!!.clientMessageDao().insert(msg)
-            }
-
-        }
-
-        fun getMessageDetails(context: Context, id: Int) : LiveData<ClientMessage>? {
-
-            messageDatabase = initializeDB(context)
-
-            clientMsg = messageDatabase!!.clientMessageDao().getMessage(id)
-
-            return clientMsg
-        }
-
-    }
-
 
 }

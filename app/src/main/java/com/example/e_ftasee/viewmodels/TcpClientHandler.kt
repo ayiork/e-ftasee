@@ -1,6 +1,8 @@
 package com.example.e_ftasee.viewmodels
 
+import android.os.Build
 import android.util.Log
+import androidx.annotation.RequiresApi
 import com.example.e_ftasee.models.ClientMessage
 import java.io.DataInputStream
 import java.io.IOException
@@ -12,6 +14,7 @@ class TcpClientHandler(private val dataInputStream: DataInputStream) : Thread() 
 
     //val msgs: ArrayList<String> = ArrayList()
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun run() {
         while (true) {
             try {

@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentManager
 import com.example.e_ftasee.FoodApplication
 import com.example.e_ftasee.R
 import com.example.e_ftasee.viewmodels.MainViewModel
+import com.example.e_ftasee.viewmodels.MessageViewModel
 import com.example.e_ftasee.viewmodels.OrdersViewModel
 import com.example.e_ftasee.viewmodels.TcpServerService
 
@@ -20,11 +21,13 @@ class MainActivity : AppCompatActivity(), ConnectorFragment{
     lateinit var context: Context
     private val mainViewModel: MainViewModel by viewModels()
     private val ordersViewModel: OrdersViewModel by viewModels()
+    private val messageViewModel: MessageViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         ordersViewModel.repository = (application as FoodApplication).repository
+        messageViewModel.repositoryMsg = (application as FoodApplication).repositoryMsg
         startServerService()
         if (findViewById<View>(R.id.fragment_container) != null) {
             if (savedInstanceState != null) {
@@ -101,7 +104,7 @@ class MainActivity : AppCompatActivity(), ConnectorFragment{
         if (mainViewModel.auth(user,pass)){
             //mainViewModel.setContext(applicationContext)
             val transaction = supportFragmentManager.beginTransaction()
-            val newFragment = OrdersFragment()
+            val newFragment = MessageFragment()
             transaction.replace(R.id.fragment_container, newFragment).addToBackStack(null)
             transaction.commit()
         }
