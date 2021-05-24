@@ -42,10 +42,7 @@ class MainActivity : AppCompatActivity(), ConnectorFragment{
     }
 
     private fun startServerService() {
-//        var intent= Intent(applicationContext, TcpServerService::class.java)
-//        intent.putExtra((application as FoodApplication).repositoryMsg)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-
             startForegroundService(Intent(applicationContext, TcpServerService::class.java))
         } else {
             startService(Intent(applicationContext, TcpServerService::class.java))
@@ -106,7 +103,6 @@ class MainActivity : AppCompatActivity(), ConnectorFragment{
 
     override fun login(user: String, pass: String) {
         if (mainViewModel.auth(user,pass)){
-            //mainViewModel.setContext(applicationContext)
             startServerService()
             val transaction = supportFragmentManager.beginTransaction()
             val newFragment = MessageFragment()
@@ -128,6 +124,6 @@ class MainActivity : AppCompatActivity(), ConnectorFragment{
 
     override fun onDestroy() {
         super.onDestroy()
-        //applicationContext.stopService(TcpServerService::class.java)
+        applicationContext.stopService(Intent(this, TcpServerService::class.java))
     }
 }

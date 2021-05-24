@@ -1,20 +1,18 @@
 package com.example.e_ftasee.viewmodels
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.e_ftasee.models.Food
 import com.example.e_ftasee.models.Order
-import com.example.e_ftasee.repository.OrdersManager
+import com.example.e_ftasee.repository.OrdersRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlin.collections.ArrayList
 
 class OrdersViewModel: ViewModel() {
 
-    lateinit var repository: OrdersManager
+    lateinit var repository: OrdersRepository
     private lateinit var ordersList: LiveData<List<Order>>
     private lateinit var ordersTables: Array<Int?>
     private var selected = MutableLiveData<Pair<Int, Order>>()
