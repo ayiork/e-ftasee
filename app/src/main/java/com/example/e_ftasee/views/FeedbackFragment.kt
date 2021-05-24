@@ -17,12 +17,17 @@ class FeedbackFragment: Fragment() {
                               savedInstanceState: Bundle?): View {
         communicator = activity as ConnectorFragment
         val  feedback_fragment : View = inflater!!.inflate(R.layout.feedback_layout, container, false)
-
         val feedback1 =  feedback_fragment?.findViewById<View>(R.id.editTextTextPersonName3) as EditText
         val feedback2 =  feedback_fragment?.findViewById<View>(R.id.editTextTextPersonName2) as EditText
-        val feedback = "Feedback for staff: "+feedback1.text.toString()+" Feedback for experience/food: "+feedback2.text.toString()
         val button =  feedback_fragment?.findViewById<View>(R.id.button5) as Button
         button.setOnClickListener{
+            var text1=""
+            if (!feedback1.text.isNullOrEmpty())
+                text1= feedback1.text.toString()
+            var text2=""
+            if (!feedback2.text.isNullOrEmpty())
+                text2= feedback2.text.toString()
+            val feedback = "Feedback for staff: "+text1+" Feedback for experience/food: "+text2
             communicator.feedback(feedback)
         }
         return feedback_fragment
