@@ -2,8 +2,11 @@ package com.example.e_ftasee.views
 
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.widget.Adapter
 import android.widget.ArrayAdapter
+import android.widget.ListAdapter
 import android.widget.ListView
 import androidx.annotation.Nullable
 import androidx.annotation.RequiresApi
@@ -18,6 +21,7 @@ import com.example.e_ftasee.viewmodels.MessageViewModel
 class MessageFragment:ListFragment() {
 
     private val messageViewModel: MessageViewModel by activityViewModels()
+    //private lateinit var  listAdpt:ArrayAdapter
 
     @RequiresApi(Build.VERSION_CODES.O)
     @Override
@@ -41,10 +45,10 @@ class MessageFragment:ListFragment() {
 
     }
 
+
     @Override
     override fun onStart() {
         super.onStart()
-
         // When in two-pane layout, set the listview to highlight the selected list item
         // (We do this during onStart because at the point the listview is available.)
         if (parentFragmentManager.findFragmentById(R.id.food_details_fragment) != null) {
@@ -84,5 +88,9 @@ class MessageFragment:ListFragment() {
     override fun onStop() {
         super.onStop()
         listView.setItemChecked(0, false)
+    }
+
+    fun remove(){
+
     }
 }

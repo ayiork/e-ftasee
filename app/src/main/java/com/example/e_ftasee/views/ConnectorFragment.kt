@@ -7,5 +7,6 @@ interface ConnectorFragment {
     fun loginPage()
     fun login(user: String, pass: String)
     fun feedback(feedback: String)
+    fun popFragment()
 
 }

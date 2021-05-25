@@ -52,6 +52,12 @@ class MessageViewModel: ViewModel() {
             return messagesList
         }
 
+        fun removeMessage(id:Int){
+            viewModelScope.launch(Dispatchers.IO) {
+                repositoryMsg.removeMessage(id)
+            }
+        }
+
         fun insert(name: String, details:String){
             viewModelScope.launch(Dispatchers.IO) {
                 repositoryMsg.insertMessage(name,details)

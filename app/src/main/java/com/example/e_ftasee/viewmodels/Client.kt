@@ -17,8 +17,8 @@ class Client {
 
     companion object {
         private const val SERVERPORT = 9999
-        //private const val SERVER_IP = "127.0.0.1"
-        private const val SERVER_IP = "192.168.1.105"
+        private const val SERVER_IP = "127.0.0.1"
+        //private const val SERVER_IP = "192.168.1.105"
         var counter = 1
     }
 

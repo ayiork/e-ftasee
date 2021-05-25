@@ -38,5 +38,8 @@ class MessageRepository(private val messageDao: MessageDao) {
         var msg = ClientMessage(name= name,details= details,date= formatted)
         messageDao.insert(msg)
     }
+    suspend fun removeMessage(id:Int){
+        messageDao.delete(id)
+    }
 
 }

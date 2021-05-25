@@ -126,6 +126,10 @@ class MainActivity : AppCompatActivity(), ConnectorFragment{
         fragmentManager.popBackStack()
     }
 
+    override fun popFragment() {
+        val fragmentManager: FragmentManager = supportFragmentManager
+        fragmentManager.popBackStack()
+    }
     override fun onDestroy() {
         super.onDestroy()
         //applicationContext.stopService(TcpServerService::class.java)
