@@ -19,9 +19,7 @@ import com.example.e_ftasee.viewmodels.OrdersViewModel
 
 class AdminOrderFragment: Fragment(),View.OnClickListener  {
 
-    private val orderViewModel: OrdersViewModel by activityViewModels()
     private val messageViewModel: MessageViewModel by activityViewModels()
-    private val mainViewModel: MainViewModel by activityViewModels()
     private var mCurrentPosition = -1
     private lateinit var order: TextView
     private lateinit var vieww: View
@@ -36,6 +34,8 @@ class AdminOrderFragment: Fragment(),View.OnClickListener  {
         addToOrderBut.setOnClickListener(this)
         addToOrderBut.setText(R.string.removeMessage)
         addToOrderBut.visibility=View.VISIBLE
+        val deleteOrderBut: Button = vieww!!.findViewById(R.id.delete_order_button) as Button
+        deleteOrderBut.visibility=View.GONE
         return vieww
     }
 
@@ -44,7 +44,7 @@ class AdminOrderFragment: Fragment(),View.OnClickListener  {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         messageViewModel.getSelectedMessage().observe(viewLifecycleOwner, {
-            Log.i("SingleOrderFragment", "onViewCreated");
+            Log.i("AdminOrderFragment", "onViewCreated");
             order.text = it.second.details +"\n\n"
             mCurrentPosition = it.first
         })
@@ -59,7 +59,7 @@ class AdminOrderFragment: Fragment(),View.OnClickListener  {
             if (it.second!=null)
                 messageViewModel.removeMessage(it.second.messageId!!)
         })
-        Toast.makeText(activity,"Message removed", Toast.LENGTH_SHORT).show()
+        Toast.makeText(activity,R.string.message_removed, Toast.LENGTH_SHORT).show()
         communicator.popFragment()
     }
 

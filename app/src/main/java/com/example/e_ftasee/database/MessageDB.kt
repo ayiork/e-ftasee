@@ -13,7 +13,6 @@ abstract class MessageDB: RoomDatabase()  {
     abstract fun messageDao(): MessageDao
 
     companion object {
-        // Singleton to prevent multiple instances from existing
         private var INSTANCE: MessageDB? = null
 
         fun getMessageDatabase(context: Context): MessageDB?{

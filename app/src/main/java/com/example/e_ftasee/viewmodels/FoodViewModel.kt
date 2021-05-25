@@ -20,19 +20,23 @@ class FoodViewModel: ViewModel() {
         loadFoodNames()
     }
 
+    // return a pair that is the selected Food and its position
     fun getSelectedFood(): LiveData<Pair<Int, Food>> {
         return selectedFood
     }
 
+    // select the food at the given position
     fun selectFoodAt(position: Int) {
         Log.i("selectfood", selectedFood.value.toString());
         selectedFood.value = Pair(position, foodList[position])
     }
 
+    // return an array that contain the Names of the foods
     fun getFoodNames(): Array<String?>{
         return foodNames
     }
 
+    // Given the id it returns the food that has that id
     fun getFoodById(id: Long):Food?{
         for (food in foodList)
             if (food.foodId== id)
@@ -40,10 +44,12 @@ class FoodViewModel: ViewModel() {
         return null
     }
 
+    // load the foodnames from the repository
     private fun loadFoodNames(){
         foodNames = foodManager.getFoodNames()
     }
 
+    // load the food from the repository
     private fun loadFood(){
         foodList= foodManager.food
     }

@@ -42,7 +42,7 @@ class OrdersRepository(private val orderDao: OrderDao) {
     }
 
     //delete my order
-    fun deleteMyOrder(){
+    suspend fun deleteMyOrder(){
         order = null
     }
 

@@ -10,7 +10,7 @@ class UsersRepository {
     init {
         if (admins.isEmpty()){
             admins.add(Admin("anaoum","asnaoum123","Andreas Naoum"))
-            admins.add(Admin("ayiork","ayiork123","Andreas Yiorkatzi"))
+            admins.add(Admin("agiork","agiork123","Andreas Giorkatzi"))
             admins.add(Admin("ashiamtanis","ahiamtanis123", "Andreas Shiamtanis"))
             admins.add(Admin("a","aa","A Aa"))
         }
