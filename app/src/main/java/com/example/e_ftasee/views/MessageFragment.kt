@@ -69,7 +69,8 @@ class MessageFragment:ListFragment() {
             @Override
             override fun onChanged(@Nullable msgs: List<ClientMessage?>?) {
                 // Update the cached copy of the words in the adapter.
-                messageViewModel.selectMessageAt(position,msgs?.get(position)!!)
+                if (msgs!=null && msgs!!.size>position)
+                    messageViewModel.selectMessageAt(position,msgs?.get(position)!!)
             }
         })
         //ordersViewModel.selectOrderAt(position)
