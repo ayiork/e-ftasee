@@ -43,8 +43,11 @@ class FoodFragment: Fragment(),View.OnClickListener {
             mCurrentPosition = it.first
         })
     }
+
+
     @Override
     override fun onClick(v: View?) {
+        // add the selected food into the order of the table
         lateinit var f:Food
         foodViewModel.getSelectedFood().observe(viewLifecycleOwner, {
             f=it.second

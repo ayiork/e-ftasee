@@ -27,4 +27,8 @@
     <string name="place_order_button">Place order</string>
     <string name="removeMessage">Remove message</string>
     <string name="added">Added to order</string>
+    <string name="delete_order_button">Delete order</string>
+    <string name="order_placed">Order placed</string>
+    <string name="order_cleared">Order cleared</string>
+    <string name="message_removed">Message Removed</string>
 </resources>

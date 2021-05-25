@@ -27,7 +27,7 @@ class FeedbackFragment: Fragment() {
             var text2=""
             if (!feedback2.text.isNullOrEmpty())
                 text2= feedback2.text.toString()
-            val feedback = this.getString(R.string.feedbackStaff)+" "+text1+this.getString(R.string.feedbackFood)+" "+text2
+            val feedback = this.getString(R.string.feedbackStaff)+":  "+text1+"\n"+this.getString(R.string.feedbackFood)+":  "+text2
             communicator.feedback(feedback)
         }
         return feedback_fragment

@@ -13,7 +13,7 @@ interface OrderDao {
     suspend fun Insert(order: Order?)
 
     @Delete
-    fun Delete(order: Order?)
+    suspend fun Delete(order: Order?)
 
     @Query("DELETE FROM orders_table")
     fun deleteAllOrders()

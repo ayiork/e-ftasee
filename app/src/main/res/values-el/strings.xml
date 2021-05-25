@@ -27,4 +27,8 @@
     <string name="place_order_button">Υποβολή παραγγελίας</string>
     <string name="removeMessage">Διαγραφή μηνύματος</string>
     <string name="added">Προσθέθηκε στην παραγγελία</string>
+    <string name="delete_order_button">Διαγραφή παραγγελίας</string>
+    <string name="order_placed">Η παραγγελία στάλθηκε</string>
+    <string name="order_cleared">Η παραγγελία σβήστηκε</string>
+    <string name="message_removed">Το μήνυμα διαγράφηκε</string>
 </resources>

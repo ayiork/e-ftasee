@@ -31,6 +31,9 @@ class SingleOrderFragment: Fragment(),View.OnClickListener  {
         val addToOrderBut: Button = vieww!!.findViewById(R.id.place_order_button) as Button
         addToOrderBut.setOnClickListener(this)
         addToOrderBut.visibility=View.GONE
+        val deleteOrderBut: Button = vieww!!.findViewById(R.id.delete_order_button) as Button
+        deleteOrderBut.setOnClickListener(this)
+        deleteOrderBut.visibility=View.GONE
         return vieww
     }
 
@@ -43,19 +46,35 @@ class SingleOrderFragment: Fragment(),View.OnClickListener  {
         if (ord !=null) {
             val addToOrderBut: Button = vieww!!.findViewById(R.id.place_order_button) as Button
             addToOrderBut.visibility=View.VISIBLE
+            val deleteOrderBut: Button = vieww!!.findViewById(R.id.delete_order_button) as Button
+            deleteOrderBut.visibility=View.VISIBLE
             order.text = ord!!.details + "\n\n" + "price: €" + ord!!.totalPrice
         }
     }
 
     @Override
     override fun onClick(v: View?) {
-
-        var table:Int=0
-        mainViewModel.givenID().observe(this){id->table=id}
-        if (table!=0) {
-            orderViewModel.placeOrder(table)
-            Toast.makeText(activity,"Order placed", Toast.LENGTH_SHORT).show()
-            communicator.popFragment()
+        // if the place order button is clicked then the order is send to the viewmodel to be
+        // inserted into the db
+        if (v!!.id==R.id.place_order_button) {
+            var table: Int = 0
+            mainViewModel.givenID().observe(this) { id -> table = id }
+            if (table != 0) {
+                orderViewModel.placeOrder(table)
+                Toast.makeText(activity, R.string.order_placed, Toast.LENGTH_SHORT).show()
+                communicator.popFragment()
+            }
+        }
+        // if the delete order button is clicked then the appropriate function of viewmodel is
+        // called to delete the order from the repository
+        else if(v!!.id==R.id.delete_order_button){
+            var table: Int = 0
+            mainViewModel.givenID().observe(this) { id -> table = id }
+            if (table != 0) {
+                orderViewModel.deleteOrder(table)
+                Toast.makeText(activity, R.string.order_cleared, Toast.LENGTH_SHORT).show()
+                communicator.popFragment()
+            }
         }
     }
 

@@ -8,11 +8,9 @@ import com.example.e_ftasee.models.Order
 
 @Database(entities = [Order::class] , version = 1, exportSchema = false)
 abstract class OrderDatabase : RoomDatabase() {
-    //private val instance: OrderDatabase? = null
     abstract fun orderDao(): OrderDao
 
     companion object {
-        // Singleton to prevent multiple instances from existing
         private var INSTANCE: OrderDatabase? = null
 
         fun getOrderDatabase(context: Context): OrderDatabase?{
