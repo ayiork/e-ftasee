@@ -1,17 +1,13 @@
 package com.example.e_ftasee.viewmodels
 
 import android.os.Build
-import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.e_ftasee.models.ClientMessage
-import com.example.e_ftasee.models.Food
-import com.example.e_ftasee.models.Order
 import com.example.e_ftasee.repository.MessageRepository
-import com.example.e_ftasee.repository.OrdersManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 

@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.e_ftasee.models.Food
-import com.example.e_ftasee.repository.FoodManager
+import com.example.e_ftasee.repository.FoodRepository
 import kotlin.collections.ArrayList
 
 class FoodViewModel: ViewModel() {
@@ -13,7 +13,7 @@ class FoodViewModel: ViewModel() {
     private lateinit var foodList: ArrayList<Food>
     private lateinit var foodNames: Array<String?>
     private var selectedFood = MutableLiveData<Pair<Int, Food>>()
-    private val foodManager = FoodManager()
+    private val foodManager = FoodRepository()
 
     init{
         loadFood()
