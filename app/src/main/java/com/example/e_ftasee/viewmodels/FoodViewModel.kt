@@ -20,7 +20,6 @@ class FoodViewModel: ViewModel() {
         loadFoodNames()
     }
 
-    // here can be added another int to show the amount of food
     fun getSelectedFood(): LiveData<Pair<Int, Food>> {
         return selectedFood
     }

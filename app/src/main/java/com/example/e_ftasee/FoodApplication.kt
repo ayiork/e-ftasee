@@ -10,7 +10,6 @@ import com.example.e_ftasee.repository.OrdersRepository
 
 @RequiresApi(Build.VERSION_CODES.O)
 class FoodApplication:Application() {
-
     val database by lazy{ OrderDatabase.getOrderDatabase(this)}
     val repository by lazy {OrdersRepository(database!!.orderDao())}
     val databaseMsg by lazy{ MessageDB.getMessageDatabase(this)}

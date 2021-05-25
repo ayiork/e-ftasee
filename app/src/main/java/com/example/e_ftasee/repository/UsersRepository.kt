@@ -1,22 +1,23 @@
 package com.example.e_ftasee.repository
-import com.example.e_ftasee.models.User
+import com.example.e_ftasee.models.Admin
 
 class UsersRepository {
 
-    // a list of all restaurant's tables
-    private val users: MutableList<User> = ArrayList()
+    // a list of all admins
+    private val admins: MutableList<Admin> = ArrayList()
 
-    //instead of these, we can use a db service such as firestone
+    //instead of these, we can use a db such as firestone
     init {
-        if (users.isEmpty()){
-            users.add(User("andreasnaoum","andreasnaoum123","Andreas Naoum"))
-            users.add(User("a","aa","Andreas Yiorkatzi"))
-            users.add(User("andreasshiamtanis","andreasshiamtanis123", "Andreas Shiamtanis"))
+        if (admins.isEmpty()){
+            admins.add(Admin("anaoum","asnaoum123","Andreas Naoum"))
+            admins.add(Admin("ayiork","ayiork123","Andreas Yiorkatzi"))
+            admins.add(Admin("ashiamtanis","ahiamtanis123", "Andreas Shiamtanis"))
+            admins.add(Admin("a","aa","A Aa"))
         }
     }
 
-    fun getUsers():  MutableList<User>{
-        return users;
+    fun getUsers():  MutableList<Admin>{
+        return admins;
     }
 
 }

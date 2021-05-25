@@ -8,10 +8,6 @@ import com.example.e_ftasee.models.ClientMessage
 @Dao
 interface MessageDao {
 
-
-//    @Update
-//    fun update(clientMessage: ClientMessage): Int
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(clientMessage: ClientMessage?)
 

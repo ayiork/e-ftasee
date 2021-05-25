@@ -2,11 +2,8 @@ package com.example.e_ftasee.views
 
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.Adapter
 import android.widget.ArrayAdapter
-import android.widget.ListAdapter
 import android.widget.ListView
 import androidx.annotation.Nullable
 import androidx.annotation.RequiresApi
@@ -15,13 +12,11 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import com.example.e_ftasee.R
 import com.example.e_ftasee.models.ClientMessage
-import com.example.e_ftasee.models.Order
 import com.example.e_ftasee.viewmodels.MessageViewModel
 
 class MessageFragment:ListFragment() {
 
     private val messageViewModel: MessageViewModel by activityViewModels()
-    //private lateinit var  listAdpt:ArrayAdapter
 
     @RequiresApi(Build.VERSION_CODES.O)
     @Override
@@ -53,7 +48,6 @@ class MessageFragment:ListFragment() {
         // (We do this during onStart because at the point the listview is available.)
         if (parentFragmentManager.findFragmentById(R.id.food_details_fragment) != null) {
             listView.choiceMode = ListView.CHOICE_MODE_SINGLE
-            //Log.i("MenuFragmentStart", parentFragmentManager.findFragmentById(R.id.food_details_fragment).toString())
         }
 
     }
@@ -61,9 +55,6 @@ class MessageFragment:ListFragment() {
     @RequiresApi(Build.VERSION_CODES.O)
     @Override
     override fun onListItemClick(l: ListView, v: View, position: Int, id: Long) {
-        // Notify the parent activity of selected item
-        //mCallback?.onArticleSelected(position)
-
         // Set the item as checked to be highlighted when in two-pane layout
         messageViewModel.getMessagesList().observe(this, object : Observer<List<ClientMessage?>?> {
             @Override
@@ -73,7 +64,6 @@ class MessageFragment:ListFragment() {
                     messageViewModel.selectMessageAt(position,msgs?.get(position)!!)
             }
         })
-        //ordersViewModel.selectOrderAt(position)
         listView.setItemChecked(position, true)
         val userFrag = parentFragmentManager.findFragmentById(R.id.food_details_fragment) as AdminOrderFragment?
         if (userFrag == null) {
@@ -82,7 +72,6 @@ class MessageFragment:ListFragment() {
             transaction.replace(R.id.fragment_container, newFragment).addToBackStack(null)
             transaction.commit()
         }
-        //listView.setItemChecked(position, true)
     }
 
     @Override
@@ -91,7 +80,4 @@ class MessageFragment:ListFragment() {
         listView.setItemChecked(0, false)
     }
 
-    fun remove(){
-
-    }
 }

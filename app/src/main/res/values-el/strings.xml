@@ -20,10 +20,11 @@
     <string name="wrongCode">Λάθος κωδικός, προσπάθησε ξανά!</string>
     <string name="waiterCalled">Έχετε καλέσει ένα σερβιτόρο.</string>
     <string name="billComing">"Ο λογαριασμός σας έρχεται!"</string>
-    <string name="feedbackStaff">Η γνώμη σας για το προσωπικό</string>
-    <string name="feedbackFood">Η γνώμη σας για την εμπειρία και το φαγητό</string>
+    <string name="feedbackStaff">Η γνώμη σας για το προσωπικό </string>
+    <string name="feedbackFood">Η γνώμη σας για την εμπειρία και το φαγητό </string>
     <string name="thankyou">Ευχαριστούμε για τον χρόνο σας!</string>
     <string name="add_to_order_button">Προσθήκη στην παραγγελία</string>
     <string name="place_order_button">Υποβολή παραγγελίας</string>
     <string name="removeMessage">Διαγραφή μηνύματος</string>
+    <string name="added">Προσθέθηκε στην παραγγελία</string>
 </resources>

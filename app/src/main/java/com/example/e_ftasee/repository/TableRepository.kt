@@ -23,6 +23,7 @@ class TableRepository {
         }
     }
 
+    //returns all tables
     fun getTables():  MutableList<Table>{
         return tables;
     }

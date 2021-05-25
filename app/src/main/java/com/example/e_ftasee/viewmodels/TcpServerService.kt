@@ -14,13 +14,13 @@ import androidx.core.app.NotificationCompat
 import com.example.e_ftasee.FoodApplication
 import com.example.e_ftasee.R
 import com.example.e_ftasee.repository.MessageRepository
-import com.example.e_ftasee.views.MainActivity
 import java.io.DataInputStream
 import java.io.IOException
 import java.net.ServerSocket
 import java.net.Socket
 import java.util.concurrent.atomic.AtomicBoolean
 
+//A server service that accepts every client and get the input data using a thread
 class TcpServerService : Service() {
 
         private var serverSocket: ServerSocket? = null
@@ -42,20 +42,14 @@ class TcpServerService : Service() {
                     }
                 }
             } catch (e: IOException) {
-                //e.printStackTrace()
+                e.printStackTrace()
                 try {
                     socket?.close()
                 } catch (ex: IOException) {
-                    //ex.printStackTrace()
+                    ex.printStackTrace()
                 }
             }
         }
-
-        /*
-         val dataOutputStream = DataOutputStream(socket.getOutputStream())
-        , dataOutputStream
-        //dataOutputStream.writeUTF("Hello Client")
-         */
 
         override fun onBind(intent: Intent): IBinder? {
             return null
@@ -82,7 +76,7 @@ class TcpServerService : Service() {
                 val notificationBuilder = NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID)
                 val notification = notificationBuilder.setOngoing(true)
                     .setSmallIcon(R.drawable.ic_launcher_foreground)
-                    .setContentTitle("e-ftasee is running in background, you can receive messages/orders from your clients")
+                    .setContentTitle("E-ftasee Server service is running in background")
                     .setPriority(NotificationManager.IMPORTANCE_MIN)
                     .setCategory(Notification.CATEGORY_SERVICE)
                     .build()

@@ -1,7 +1,6 @@
 package com.example.e_ftasee.views
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,30 +19,32 @@ class UserFragment: Fragment() {
         communicator = activity as ConnectorFragment
         val  user_fragment : View = inflater!!.inflate(R.layout.user_layout, container, false)
 
-        val imageButton2 =  user_fragment?.findViewById<View>(R.id.imageButton2) as ImageButton
-        imageButton2.setOnClickListener{
+        //actions for waiter button
+        val waiterButton =  user_fragment?.findViewById<View>(R.id.imageButton2) as ImageButton
+        waiterButton.setOnClickListener{
             communicator.tableChoice(1)
             Toast.makeText(activity,this.getString(R.string.waiterCalled), Toast.LENGTH_SHORT).show()
         }
 
-        val imageButton3 =  user_fragment?.findViewById<View>(R.id.imageButton3) as ImageButton
-        imageButton3.setOnClickListener{
+        //actions for bill button
+        val billButton =  user_fragment?.findViewById<View>(R.id.imageButton3) as ImageButton
+        billButton.setOnClickListener{
             communicator.tableChoice(2)
             Toast.makeText(activity,this.getString(R.string.billComing), Toast.LENGTH_SHORT).show()
         }
-
-        val imageButton4 =  user_fragment?.findViewById<View>(R.id.imageButton4) as ImageButton
-        imageButton4.setOnClickListener{
+        //actions for menu button
+        val menuButton =  user_fragment?.findViewById<View>(R.id.imageButton4) as ImageButton
+        menuButton.setOnClickListener{
             communicator.tableChoice(3)
         }
-
-        val imageButton5 =  user_fragment?.findViewById<View>(R.id.imageButton5) as ImageButton
-        imageButton5.setOnClickListener{
+        //actions for order button
+        val orderButton =  user_fragment?.findViewById<View>(R.id.imageButton5) as ImageButton
+        orderButton.setOnClickListener{
             communicator.tableChoice(4)
         }
-
-        val button =  user_fragment?.findViewById<View>(R.id.button2) as Button
-        button.setOnClickListener{
+        //actions for feedback button
+        val feedbackButton =  user_fragment?.findViewById<View>(R.id.button2) as Button
+        feedbackButton.setOnClickListener{
             communicator.tableChoice(5)
         }
         return user_fragment

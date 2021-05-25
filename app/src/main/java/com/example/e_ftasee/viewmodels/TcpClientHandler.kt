@@ -2,19 +2,15 @@ package com.example.e_ftasee.viewmodels
 
 import android.os.Build
 import android.util.Log
-import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
-import com.example.e_ftasee.models.ClientMessage
 import com.example.e_ftasee.repository.MessageRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 import java.io.DataInputStream
 import java.io.IOException
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 
-//, private val rep: MessageRepository
+//Reads the input data and save the message in the database
 class TcpClientHandler(private val dataInputStream: DataInputStream, private val rep : MessageRepository) : Thread() {
 
     @RequiresApi(Build.VERSION_CODES.O)

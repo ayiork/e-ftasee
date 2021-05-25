@@ -2,14 +2,11 @@ package com.example.e_ftasee.viewmodels
 
 import java.io.DataOutputStream
 import java.io.IOException
-import java.io.OutputStream
 import java.net.InetAddress
 import java.net.Socket
 import java.net.UnknownHostException
-import java.nio.charset.Charset
-import java.util.*
-import kotlin.concurrent.thread
 
+//Send a message to the server using a socket
 class Client {
 
     private var socket: Socket? = null
@@ -23,7 +20,6 @@ class Client {
     }
 
     fun sendMsg(table: Int,message: String){
-        //Order $counter
         msg= "Table $table ,$message"
         counter++
         Thread(ClientThread()).start()

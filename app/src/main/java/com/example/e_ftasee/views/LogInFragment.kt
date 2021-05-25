@@ -17,8 +17,9 @@ class LogInFragment: Fragment() {
         val loginLayout: View = inflater!!.inflate(R.layout.login_layout, container, false)
         communicator = activity as ConnectorFragment
 
-        val button =  loginLayout?.findViewById<View>(R.id.button4) as Button
-        button.setOnClickListener{
+        //actions for log in button
+        val loginButton =  loginLayout?.findViewById<View>(R.id.button4) as Button
+        loginButton.setOnClickListener{
             val username = loginLayout?.findViewById<View>(R.id.editTextTextPersonName) as EditText
             val password = loginLayout?.findViewById<View>(R.id.editTextTextPassword) as EditText
             if (!username.text.isNullOrEmpty() && !username.text.isNullOrEmpty()){

@@ -11,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import com.example.e_ftasee.FoodApplication
 import com.example.e_ftasee.R
-import com.example.e_ftasee.repository.MessageRepository
 import com.example.e_ftasee.viewmodels.MainViewModel
 import com.example.e_ftasee.viewmodels.MessageViewModel
 import com.example.e_ftasee.viewmodels.OrdersViewModel
@@ -39,6 +38,7 @@ class MainActivity : AppCompatActivity(), ConnectorFragment{
         }
     }
 
+    //Server Service, accepts clients and save messages to smartphone's db
     private fun startServerService() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             startForegroundService(Intent(applicationContext, TcpServerService::class.java))
@@ -47,8 +47,9 @@ class MainActivity : AppCompatActivity(), ConnectorFragment{
         }
     }
 
-    override fun passCode(editTextInput: Int) {
-        if (mainViewModel.tableCode(editTextInput)){
+    //if the code is correct, then show the user fragment (includes all features)
+    override fun passCode(code: Int) {
+        if (mainViewModel.tableCode(code)){
             val transaction = supportFragmentManager.beginTransaction()
             val newFragment = UserFragment()
             transaction.replace(R.id.fragment_container, newFragment).addToBackStack(null)
@@ -60,30 +61,35 @@ class MainActivity : AppCompatActivity(), ConnectorFragment{
 
     //based on user's choice do the appropriate action
     override fun tableChoice(choice: Int) {
+        //Send a message to the server that this table want a waiter
         if (choice==1) {
             var id: Int? = mainViewModel.givenID().value
             if (id != null) {
                 mainViewModel.sendMessage(id,this.getString(R.string.clientWaiter))
             }
         }
+        //Send a message to the server that this table want the bill
         else if (choice==2){
             var id: Int? = mainViewModel.givenID().value
             if (id != null) {
                 mainViewModel.sendMessage(id,this.getString(R.string.clientBill))
             }
         }
+        //Show the menu
         else if(choice==3){
             val transaction = supportFragmentManager.beginTransaction()
             val newFragment = MenuFragment()
             transaction.replace(R.id.fragment_container, newFragment).addToBackStack(null)
             transaction.commit()
         }
+        //Show user's order
         if(choice == 4){
             val transaction = supportFragmentManager.beginTransaction()
             val newFragment = SingleOrderFragment()
             transaction.replace(R.id.fragment_container, newFragment).addToBackStack(null)
             transaction.commit()
         }
+        //Show feedback fragment, so the user will be able to give a feedback
         else if(choice==5){
             val transaction = supportFragmentManager.beginTransaction()
             val newFragment = FeedbackFragment()
@@ -92,6 +98,7 @@ class MainActivity : AppCompatActivity(), ConnectorFragment{
         }
     }
 
+    //show the login Fragment
     override fun loginPage() {
         val transaction = supportFragmentManager.beginTransaction()
         val newFragment = LogInFragment()
@@ -99,6 +106,7 @@ class MainActivity : AppCompatActivity(), ConnectorFragment{
         transaction.commit()
     }
 
+    //if the login is successful, starts the server service and show the message fragment
     override fun login(user: String, pass: String) {
         if (mainViewModel.auth(user,pass)){
             startServerService()
@@ -117,14 +125,16 @@ class MainActivity : AppCompatActivity(), ConnectorFragment{
         if (id != null) {
             mainViewModel.sendMessage(id,feedback)
         }
-        val fragmentManager: FragmentManager = supportFragmentManager
-        fragmentManager.popBackStack()
+        popFragment()
     }
 
+    //pop the current fragment
     override fun popFragment() {
         val fragmentManager: FragmentManager = supportFragmentManager
         fragmentManager.popBackStack()
     }
+
+    //the service must end when the application is destroyed
     override fun onDestroy() {
         super.onDestroy()
         applicationContext.stopService(Intent(this, TcpServerService::class.java))

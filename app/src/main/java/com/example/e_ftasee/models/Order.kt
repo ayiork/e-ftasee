@@ -16,9 +16,6 @@ data class Order(
     var details: String,
     @ColumnInfo(name = "price")
     var totalPrice: Double,
-
-//    @Embedded()
-//    var food: ArrayList<Food>
 )
 
 

@@ -1,12 +1,10 @@
 package com.example.e_ftasee.viewmodels
 
-import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.e_ftasee.models.ClientMessage
 import com.example.e_ftasee.models.Table
-import com.example.e_ftasee.models.User
+import com.example.e_ftasee.models.Admin
 import com.example.e_ftasee.repository.TableRepository
 import com.example.e_ftasee.repository.UsersRepository
 
@@ -15,18 +13,18 @@ class MainViewModel : ViewModel(){
     private val rep = TableRepository()
     private val repUsers = UsersRepository()
     private var tables: MutableList<Table>? = null
-    private var users:  MutableList<User>? = null
+    private var admins:  MutableList<Admin>? = null
     private var table_id : MutableLiveData<Int> = MutableLiveData<Int>(0)
-    private lateinit var userRest : String
     private lateinit var client: Client
 
-
+    //load tables' numbers and codes
     private fun loadTables(){
         tables = rep.getTables()
     }
 
+    //Load admins' username and passwords
     private fun loadUsers(){
-        users = repUsers.getUsers()
+        admins = repUsers.getUsers()
     }
 
     //the table is verified by the code (in the future with a code from QR code)
@@ -42,21 +40,23 @@ class MainViewModel : ViewModel(){
         return false
     }
 
+    //return the table id
     fun givenID(): LiveData<Int>{
         return table_id
     }
 
+    //authenticate a user
     fun auth(username: String, pass: String): Boolean{
-        if (users.isNullOrEmpty())
+        if (admins.isNullOrEmpty())
             loadUsers()
-        for (user in users!!)
+        for (user in admins!!)
             if (user.username==username && user.password==pass) {
-                userRest = user.fullname
                 return true
             }
         return false
     }
 
+    //send a message to the server
     fun sendMessage(table:Int, msg : String) {
         client.sendMsg(table, msg)
     }

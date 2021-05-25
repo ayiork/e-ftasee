@@ -10,7 +10,9 @@ import java.time.format.DateTimeFormatter
 
 @RequiresApi(Build.VERSION_CODES.O)
 class MessageRepository(private val messageDao: MessageDao) {
-    private lateinit var messages:LiveData<List<ClientMessage>>
+
+    //only today messages will be shown up
+    private var messages:LiveData<List<ClientMessage>>
 
     init{
         val current = LocalDateTime.now()
@@ -19,10 +21,12 @@ class MessageRepository(private val messageDao: MessageDao) {
         messages = messageDao.getDateMessages(formatted)
     }
 
+    //returns a list of messages
     fun getMessages():LiveData<List<ClientMessage>>{
         return messages
     }
 
+    //insert a message to db, the date of the msg is the current day
     suspend fun insertMessage(name: String,details: String){
         val current = LocalDateTime.now()
         val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")

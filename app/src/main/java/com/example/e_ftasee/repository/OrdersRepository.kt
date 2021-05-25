@@ -10,6 +10,7 @@ class OrdersRepository(private val orderDao: OrderDao) {
     private var orders: LiveData<List<Order>> = orderDao.getAllOrders()
     private var order: Order? = null
 
+    //returns my order
     fun getMyOrder(id:Int):Order?{
         if (order != null && order!!.tableNum == id) {
             return order
@@ -17,10 +18,12 @@ class OrdersRepository(private val orderDao: OrderDao) {
             return null
     }
 
+    //returns a list of orders
     fun getOrders(): LiveData<List<Order>>{
         return orders
     }
 
+    //update
     fun updateOrder(table : Int,food: Food){
         if (order==null || order!!.tableNum != table){
             var foodStr: String = food.name+"\n"
@@ -31,13 +34,19 @@ class OrdersRepository(private val orderDao: OrderDao) {
             order!!.totalPrice+=food.price
             }
     }
+
+    //insert order to db
     suspend fun insertOrderToDB(){
         if (order!=null)
             orderDao.Insert(order)
     }
+
+    //delete my order
     fun deleteMyOrder(){
         order = null
     }
+
+    //delete all orders
     fun deleteOrders(){
         orderDao.deleteAllOrders()
     }

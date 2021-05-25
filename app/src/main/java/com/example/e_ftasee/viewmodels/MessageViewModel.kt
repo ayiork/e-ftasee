@@ -30,19 +30,8 @@ class MessageViewModel: ViewModel() {
 
 
         fun selectMessageAt(position: Int,msg: ClientMessage) {
-            //Log.i("selectfood", selectedFood.value.toString());
-            //loadOrders()
             selected.value = Pair(position,msg)
         }
-
-
-//        fun getOrdersList(): LiveData<List<Order>> {
-//            return ordersList
-//        }
-//
-//        fun getMyOrder(tableId: Int): Order?{
-//            return repository.getMyOrder(tableId)
-//        }
 
         fun getMessagesList():LiveData<List<ClientMessage>>{
             return messagesList

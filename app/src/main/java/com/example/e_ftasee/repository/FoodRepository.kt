@@ -72,6 +72,7 @@ class FoodRepository {
         )
     }
 
+    //get the foods' names/titles
     fun getFoodNames(): Array<String?> {
         val names = arrayOfNulls<String>(food.size)
 
