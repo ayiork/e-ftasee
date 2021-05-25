@@ -1,5 +1,5 @@
 # e-ftasee
-The application is developed for the purpose of the course Android Programming (SDU).
+The application is developed for the purpose of the course Android Programming (SDU) for the Spring Semester 2021.
 
 The main idea of the application is the idea of a Digital/Virtual Waiter, that means restaurant's clients can place their orders from the e-ftasee application and admin can receive them.
 
