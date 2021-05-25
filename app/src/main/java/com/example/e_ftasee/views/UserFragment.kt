@@ -47,6 +47,7 @@ class UserFragment: Fragment() {
         feedbackButton.setOnClickListener{
             communicator.tableChoice(5)
         }
+        //rturn Fragment
         return user_fragment
     }
 
