@@ -19,14 +19,7 @@ class MainViewModel : ViewModel(){
     private var table_id : MutableLiveData<Int> = MutableLiveData<Int>(0)
     private lateinit var userRest : String
     private lateinit var client: Client
-    private lateinit var messagesList: ArrayList<ClientMessage>
-    private lateinit var messagesNames: Array<String?>
-    private var selected = MutableLiveData<Pair<Int, ClientMessage>>()
-    private var appContext:Context? = null
 
-    init{
-     //
-    }
 
     private fun loadTables(){
         tables = rep.getTables()
@@ -67,7 +60,4 @@ class MainViewModel : ViewModel(){
     fun sendMessage(table:Int, msg : String) {
         client.sendMsg(table, msg)
     }
-
-
-
 }

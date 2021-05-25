@@ -24,7 +24,6 @@ class MainActivity : AppCompatActivity(), ConnectorFragment{
     private val ordersViewModel: OrdersViewModel by viewModels()
     private val messageViewModel: MessageViewModel by viewModels()
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -35,7 +34,6 @@ class MainActivity : AppCompatActivity(), ConnectorFragment{
                 return
             }
             val firstFragment = TableFragment()
-            //firstFragment.arguments = intent.extras
             supportFragmentManager.beginTransaction()
                 .add(R.id.fragment_container, firstFragment).commit()
         }
@@ -49,7 +47,6 @@ class MainActivity : AppCompatActivity(), ConnectorFragment{
         }
     }
 
-
     override fun passCode(editTextInput: Int) {
         if (mainViewModel.tableCode(editTextInput)){
             val transaction = supportFragmentManager.beginTransaction()
@@ -61,6 +58,7 @@ class MainActivity : AppCompatActivity(), ConnectorFragment{
             Toast.makeText(this,this.getString(R.string.wrongCode), Toast.LENGTH_SHORT).show()
     }
 
+    //based on user's choice do the appropriate action
     override fun tableChoice(choice: Int) {
         if (choice==1) {
             var id: Int? = mainViewModel.givenID().value
@@ -113,6 +111,7 @@ class MainActivity : AppCompatActivity(), ConnectorFragment{
             Toast.makeText(this,this.getString(R.string.invalid), Toast.LENGTH_SHORT).show()
     }
 
+    //send the feedback to the server
     override fun feedback(feedback: String){
         var id: Int? = mainViewModel.givenID().value
         if (id != null) {

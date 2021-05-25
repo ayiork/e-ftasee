@@ -10,7 +10,7 @@ class FoodRepository {
         addFood()
     }
 
-
+    //add menu items to food list, this can be done using a database
     private fun addFood(){
         food = ArrayList()
         food.add(
